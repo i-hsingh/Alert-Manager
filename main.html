@@ -1,0 +1,1234 @@
+<html><head><base href="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PagerDuty On Tour Sydney 2025</title>
+    <!-- Import Google Material Icons and Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/material-darker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/lint/lint.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        .sidenav {
+            width: 275px;
+            background-color: #252525;
+            padding-top: 20px;
+        }
+
+        .sidenav .user-view {
+            background-color: #1a1a1a;
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .sidenav .user-view a.brand-logo {
+            display: block;
+            color: #f0f0f0;
+            text-align: center;
+        }
+
+        .sidenav .user-view a.brand-logo i.logo-icon {
+            font-size: 80px;
+        }
+
+        .sidenav .user-view a.brand-logo span.logo-text {
+            font-size: 20px; /* Reduced font size */
+            display: block;
+        }
+
+        .sidenav .user-view .help-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .categories {
+            list-style-type: none;
+            margin-bottom: 60px;
+        }
+
+        .categories li a {
+            color: #f0f0f0;
+            display: block;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .categories li a:hover, .categories li a.active {
+            background-color: #3a3a3a;
+        }
+
+        .routing-key-container {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .routing-key-container input {
+            flex: 1;
+            padding: 10px;
+            background-color: #3a3a3a;
+            border: none;
+            color: #f0f0f0;
+        }
+
+        .routing-key-container a {
+            margin-left: 10px;
+            color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .trigger-button-container {
+            text-align: center;
+            padding: 0 20px 20px 20px;
+        }
+
+        main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .card-content .card-title {
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .card {
+            background-color: #2a2a2a;
+        }
+
+        .card .card-content p {
+            color: #b0b0b0;
+        }
+
+        .card .card-action label input[type="checkbox"] + span {
+            color: #f0f0f0;
+        }
+
+        .modal {
+            background-color: #2a2a2a;
+        }
+
+        .modal .modal-content {
+            color: #f0f0f0;
+        }
+
+        .CodeMirror {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            height: auto;
+        }
+
+        .toast {
+            background-color: #ff5722;
+        }
+
+        .help-icon {
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+        
+        .help-popup {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 260px;
+            background-color: #3a3a3a;
+            border-radius: 8px;
+            padding: 15px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+
+        .help-popup p {
+            color: #f0f0f0;
+        }
+
+        .help-popup.show {
+            display: block;
+        }
+        .pagerduty-logo {
+            height: 40px; /* Adjust the size as needed */
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        #pdfContainer {
+            position: fixed;
+            top: 0;
+            left: 275px;
+            width: calc(100% - 250px);
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        #pdfIframe {
+            width: 90%;
+            height: 90%;
+            margin: 2% auto;
+            display: block;
+            border: none;
+            background: white;
+        }
+
+    </style>
+</head>
+<body>
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+        <li>
+            <div class="user-view center-align">
+                <a href="#!" class="brand-logo center">
+                    <img src="https://info.pagerduty.com/rs/093-VPJ-807/images/pdot-logo.png?version=0" 
+                        alt="PagerDuty Logo" class="pagerduty-logo">
+                    <span class="logo-text">Sydney 2025</span>
+                </a>
+                <i class="material-icons help-icon" id="helpIcon">info_outline</i>
+            </div>
+        </li>
+        <!-- Categories -->
+        <li>
+            <ul class="categories" id="categories"></ul>
+        </li>
+        <!-- Configuration -->
+        <li>
+            <div class="config">
+                <div class="routing-key-container">
+                    <input type="password" id="routingKey" placeholder="Enter your routing key">
+                    <a href="#!" id="toggleRoutingKey"><i class="material-icons">visibility</i></a>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="config">
+                <div class="trigger-button-container center-align">
+                    <a class="btn red" id="triggerBtn">
+                    <i class="material-icons left">whatshot</i>Trigger
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <!-- Help Popup -->
+    <div class="help-popup card" id="helpPopup">
+        <div class="card-content">
+            <span class="card-title">Help</span>
+            <p>This tool allows you to generate and trigger PagerDuty events. Select a category, choose your events, and click the "Trigger" button to send them to PagerDuty.</p>
+            <p>Don't forget to set your Routing Key in the configuration section!</p>
+        </div>
+    </div>
+
+    <main>
+        <div class="row" id="cardContainer">
+            <!-- Cards will be injected here -->
+        </div>
+    </main>
+
+    <!-- Edit Modal Structure -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h4>Edit JSON Payload</h4>
+            <textarea id="jsonEditor" class="materialize-textarea"></textarea>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close btn grey" id="cancelJson">Cancel</a>
+            <a href="#!" class="btn yellow darken-2" id="resetJson">Reset</a>
+            <a href="#!" class="modal-close btn green" id="saveJson">Save Changes</a>
+        </div>
+    </div>
+    <div id="pdfContainer">
+        <iframe id="pdfIframe" src="" type="application/pdf"></iframe>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/edit/closebrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/lint/json-lint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/lint/lint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/display/autorefresh.min.js"></script>
+    
+    <script>
+        const categories = [
+            { name: "Presentation", icon: "📝" },
+            { name: "Well Understood", icon: "✨🤖" },
+            { name: "Partially Understood", icon: "🧠🤖" },
+            { name: "New & Novel", icon: "🔍👀" },
+            { name: "Prometheus", icon: "🔥" },
+            { name: "SolarWinds", icon: "☀️" },
+            { name: "CrowdStrike", icon: "🦅" },
+            { name: "Customer Sentiment", icon: "😊" },
+            { name: "All", icon: "🌐" }
+        ];
+        
+        const payloads = {
+            "Partially Understood": [
+                { 
+                    title: "Code Deployment", 
+                    description: "Bad Code", 
+                    category: "Partially Understood",
+                    payload: { 
+                        "payload": {
+                            "summary": "Unexpected System Failure Detected",
+                            "timestamp": "2025-03-26T14:30:00Z",
+                            "severity": "critical",
+                            "source": "Monitoring System",
+                            "class": "ServiceOutage",
+                            "component": "Web Application",
+                            "group": "Production",
+                            "custom_details": {
+                                "message": "The web application is experiencing downtime.",
+                                "affected_service": "web-app",
+                                "error_rate": "97%",
+                                "latency": "15s",
+                                "database_unreachable": true,
+                                "recent_changes_detected": true,
+                                "change_reference_id": "unknown",
+                                "observed_behavior": "Service returning 500 errors",
+                                "suggested_action": "Investigate recent logs, check health of dependent services"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "system-outage-67890",
+                        "event_action": "trigger",
+                        "client": "Prometheus",
+                        "client_url": "https://monitoring.company.com/alerts/12345",
+                        "links": [
+                            {
+                                "href": "https://logs.company.com/query?incident=67890",
+                                "text": "View System Logs"
+                            },
+                            {
+                                "href": "https://status.company.com",
+                                "text": "Check Service Status"
+                            }
+                        ],
+                        "images": [
+                            {
+                                "src": "https://company.com/assets/incident-alert.png",
+                                "href": "https://monitoring.company.com"
+                            }
+                        ]
+                    }
+                    },
+                { 
+                    title: "Cloud Cost Spikes", 
+                    description: "Cost steadily increasing", 
+                    category: "Partially Understood",
+                    payload: { 
+                        "payload": {
+                            "summary": "Unusual Budget Deviation Detected",
+                            "timestamp": "2025-03-26T08:00:00Z",
+                            "severity": "warning",
+                            "source": "Cloud Billing System",
+                            "class": "BudgetAnomaly",
+                            "component": "Finance & Cloud Operations",
+                            "group": "Billing",
+                            "custom_details": {
+                                "message": "A deviation from projected cloud spending has been detected.",
+                                "affected_account": "company-prod",
+                                "budget_threshold_exceeded": "Yes",
+                                "current_spend_vs_projection": "$48,200 vs $35,700 (35% increase)",
+                                "time_window": "Last 24 hours",
+                                "billing_alert_id": "alert-98765",
+                                "observed_behavior": "Unexpected increase in service usage costs.",
+                                "suggested_action": "Review recent cloud activity and investigate cost drivers.",
+                                "links_for_investigation": [
+                                    {
+                                        "name": "Billing Dashboard",
+                                        "url": "https://billing.company.com/overview"
+                                    },
+                                    {
+                                        "name": "Service Usage Report",
+                                        "url": "https://cloud-monitoring.company.com/reports/usage"
+                                    }
+                                ]
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "budget-anomaly-001",
+                        "event_action": "trigger",
+                        "client": "Cloud Cost Monitoring",
+                        "client_url": "https://cloud-monitoring.company.com/alerts/98765",
+                        "links": [
+                            {
+                                "href": "https://billing.company.com/details?incident=98765",
+                                "text": "View Billing Breakdown"
+                            },
+                            {
+                                "href": "https://company.com/docs/budget-monitoring",
+                                "text": "Budget Monitoring Best Practices"
+                            }
+                        ],
+                        "images": [
+                            {
+                                "src": "https://company.com/assets/budget-alert.png",
+                                "href": "https://billing.company.com"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "New & Novel": [
+                { 
+                    title: "Shadow IT Detection", 
+                    description: "Unexpected Cloud Resource", 
+                    category: "New & Novel",
+                    payload: {
+                        "payload": {
+                            "summary": "Unexpected Cloud Resource Discrepancy Detected",
+                            "timestamp": "2025-03-26T09:15:00Z",
+                            "severity": "warning",
+                            "source": "Cloud Inventory Validator",
+                            "class": "InfrastructureDrift",
+                            "component": "Cloud Compute",
+                            "group": "Provisioning",
+                            "custom_details": {
+                                "message": "A cloud resource is present that does not align with expected deployment patterns.",
+                                "affected_account": "company-production",
+                                "cloud_provider": "AWS",
+                                "region": "us-east-1",
+                                "resource_id": "i-0abcd1234ef56789",
+                                "resource_type": "EC2 Instance",
+                                "expected_infrastructure_record": "Not found",
+                                "observed_behavior": "Resource exists but lacks expected metadata.",
+                                "time_detected": "2025-03-26T09:10:00Z",
+                                "potential_impact": "Uncertain - Requires validation.",
+                                "suggested_action": "Compare against deployment records and investigate provisioning history.",
+                                "investigation_hint": "Check recent provisioning logs for non-standard activity.",
+                                "links_for_investigation": [
+                                    {
+                                        "name": "Cloud Asset Inventory",
+                                        "url": "https://cloud-inventory.company.com"
+                                    },
+                                    {
+                                        "name": "Provisioning Logs",
+                                        "url": "https://cloud-monitoring.company.com/logs?query=resource_id:i-0abcd1234ef56789"
+                                    }
+                                ]
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "infra-drift-2025-001",
+                        "event_action": "trigger",
+                        "client": "Cloud Monitoring Service",
+                        "client_url": "https://cloud-monitoring.company.com/alerts/infra-drift-001",
+                        "links": [
+                            {
+                                "href": "https://cloud-inventory.company.com/unrecognized-resources",
+                                "text": "View Infrastructure Inventory"
+                            },
+                            {
+                                "href": "https://company.com/docs/cloud-drift",
+                                "text": "Guide: Investigating Infrastructure Drift"
+                            }
+                        ],
+                        "images": [
+                            {
+                                "src": "https://company.com/assets/drift-alert.png",
+                                "href": "https://cloud-inventory.company.com"
+                            }
+                        ]
+                    }
+                },
+                { 
+                    title: "Network Throughput", 
+                    description: "Sudden Spike in Outbound Network Traffic", 
+                    category: "New and Novel",
+                    payload: {
+                        "payload": {
+                            "summary": "Unexpected Network Throughput Deviation",
+                            "timestamp": "2025-03-26T10:30:00Z",
+                            "severity": "warning",
+                            "source": "Network Performance Monitor",
+                            "class": "ThroughputAnomaly",
+                            "component": "Network Gateway",
+                            "group": "Infrastructure",
+                            "custom_details": {
+                                "message": "Observed deviation in outbound data transfer rates compared to baseline trends.",
+                                "affected_region": "us-east-1",
+                                "observed_throughput": "12.5 Gbps (vs. usual 2.1 Gbps)",
+                                "time_window": "Last 30 minutes",
+                                "expected_behavior": "Throughput typically remains under 3 Gbps at this time.",
+                                "recently_accessed_endpoints": [
+                                    "192.168.45.32:443",
+                                    "203.0.113.5:22",
+                                    "8.8.8.8:53"
+                                ],
+                                "recently_deployed_services": [
+                                    "edge-proxy-v1.2.3",
+                                    "data-migration-job-4567"
+                                ],
+                                "observed_behavior": "Increased outbound flow patterns detected.",
+                                "potential_impact": "Service performance degradation may occur if sustained.",
+                                "suggested_action": "Review recent service activity and investigate outbound traffic patterns.",
+                                "investigation_hint": "Check network flow logs for unexpected egress patterns.",
+                                "links_for_investigation": [
+                                    {
+                                        "name": "Network Traffic Dashboard",
+                                        "url": "https://network-monitoring.company.com"
+                                    },
+                                    {
+                                        "name": "Flow Logs",
+                                        "url": "https://logs.company.com/query?filter=network-egress"
+                                    }
+                                ]
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "network-anomaly-2025-001",
+                        "event_action": "trigger",
+                        "client": "Network Monitoring Service",
+                        "client_url": "https://network-monitoring.company.com/alerts/throughput-001",
+                        "links": [
+                            {
+                                "href": "https://network-monitoring.company.com/reports",
+                                "text": "View Network Performance Reports"
+                            },
+                            {
+                                "href": "https://company.com/docs/network-anomalies",
+                                "text": "Troubleshooting Network Performance Issues"
+                            }
+                        ],
+                        "images": [
+                            {
+                                "src": "https://company.com/assets/network-alert.png",
+                                "href": "https://network-monitoring.company.com"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "Prometheus": [
+                { 
+                    title: "High Latency", 
+                    description: "API latency exceeds SLA", 
+                    category: "Prometheus",
+                    payload: { 
+                        "payload": {
+                            "summary": "High API latency detected on /v1/orders",
+                            "timestamp": "2023-07-24T14:30:00Z",
+                            "severity": "critical",
+                            "source": "/v1/orders",
+                            "component": "API",
+                            "group": "backend",
+                            "class": "performance",
+                            "custom_details": {
+                                "latency_ms": "1200",
+                                "environment": "production",
+                                "team": "api"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "/v1/orders/latency",
+                        "event_action": "trigger",
+                        "client": "Prometheus",
+                        "client_url": "https://prometheus.io",
+                        "links": [],
+                        "images": []
+                    }
+                },
+                { 
+                    title: "Disk Space Low", 
+                    description: "Disk usage above 85%", 
+                    category: "Prometheus",
+                    payload: { 
+                        "payload": {
+                            "summary": "Low disk space on db-server-3",
+                            "timestamp": "2023-07-24T14:35:00Z",
+                            "severity": "warning",
+                            "source": "db-server-3",
+                            "component": "Disk",
+                            "group": "infrastructure",
+                            "class": "capacity",
+                            "custom_details": {
+                                "disk_percent": "87.3%",
+                                "environment": "production",
+                                "team": "infrastructure"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "db-server-3/disk",
+                        "event_action": "trigger",
+                        "client": "Prometheus",
+                        "client_url": "https://prometheus.io",
+                        "links": [],
+                        "images": []
+                    }
+                }
+            ],
+            "SolarWinds": [
+                { 
+                    title: "Network Outage", 
+                    description: "Network switch down", 
+                    category: "SolarWinds",
+                    payload: { 
+                        "payload": {
+                            "summary": "Network switch outage detected at datacenter-1",
+                            "timestamp": "2023-07-24T14:40:00Z",
+                            "severity": "critical",
+                            "source": "switch-5",
+                            "component": "Network",
+                            "group": "network",
+                            "class": "outage",
+                            "custom_details": {
+                                "device": "switch-5",
+                                "location": "datacenter-1",
+                                "environment": "datacenter",
+                                "team": "network"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "switch-5/outage",
+                        "event_action": "trigger",
+                        "client": "SolarWinds",
+                        "client_url": "https://www.solarwinds.com",
+                        "links": [],
+                        "images": []
+                    }
+                },
+                { 
+                    title: "Bandwidth Saturation", 
+                    description: "Network bandwidth at 95%", 
+                    category: "SolarWinds",
+                    payload: { 
+                        "payload": {
+                            "summary": "High bandwidth usage detected on router-3",
+                            "timestamp": "2023-07-24T14:45:00Z",
+                            "severity": "warning",
+                            "source": "router-3",
+                            "component": "Network",
+                            "group": "network",
+                            "class": "capacity",
+                            "custom_details": {
+                                "bandwidth_percent": "95.5%",
+                                "environment": "datacenter",
+                                "team": "network"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "router-3/bandwidth",
+                        "event_action": "trigger",
+                        "client": "SolarWinds",
+                        "client_url": "https://www.solarwinds.com",
+                        "links": [],
+                        "images": []
+                    }
+                }
+            ],
+            "CrowdStrike": [
+                { 
+                    title: "Malware Detected", 
+                    description: "Malware found on endpoint", 
+                    category: "CrowdStrike",
+                    payload: { 
+                        "payload": {
+                            "summary": "Malware detected on laptop-4",
+                            "timestamp": "2023-07-24T14:50:00Z",
+                            "severity": "critical",
+                            "source": "laptop-4",
+                            "component": "Endpoint",
+                            "group": "security",
+                            "class": "threat",
+                            "custom_details": {
+                                "malware_name": "Trojan.Generic",
+                                "environment": "corporate",
+                                "team": "security"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "laptop-4/malware",
+                        "event_action": "trigger",
+                        "client": "CrowdStrike",
+                        "client_url": "https://www.crowdstrike.com",
+                        "links": [],
+                        "images": []
+                    }
+                },
+                { 
+                    title: "Suspicious Activity", 
+                    description: "Unusual process behavior detected", 
+                    category: "CrowdStrike",
+                    payload: { 
+                        "payload": {
+                            "summary": "Suspicious process activity on desktop-7",
+                            "timestamp": "2023-07-24T14:55:00Z",
+                            "severity": "warning",
+                            "source": "desktop-7",
+                            "component": "Endpoint",
+                            "group": "security",
+                            "class": "threat",
+                            "custom_details": {
+                                "process_name": "unknown.exe",
+                                "environment": "corporate",
+                                "team": "security"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "desktop-7/suspicious",
+                        "event_action": "trigger",
+                        "client": "CrowdStrike",
+                        "client_url": "https://www.crowdstrike.com",
+                        "links": [],
+                        "images": []
+                    }
+                }
+            ],
+            "Customer Sentiment": [
+                { 
+                    title: "Negative Feedback Spike", 
+                    description: "Sudden increase in negative reviews", 
+                    category: "Customer Sentiment",
+                    payload: { 
+                        "payload": {
+                            "summary": "Spike in negative customer feedback on web",
+                            "timestamp": "2023-07-24T15:00:00Z",
+                            "severity": "critical",
+                            "source": "web",
+                            "component": "Feedback",
+                            "group": "support",
+                            "class": "customer",
+                            "custom_details": {
+                                "negative_feedback_percent": "80.1%",
+                                "environment": "production",
+                                "team": "support"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "web/feedback",
+                        "event_action": "trigger",
+                        "client": "Sentiment Analysis",
+                        "client_url": "https://example.com",
+                        "links": [],
+                        "images": []
+                    }
+                },
+                { 
+                    title: "Customer Churn Risk", 
+                    description: "High-value customer showing churn signals", 
+                    category: "Customer Sentiment",
+                    payload: { 
+                        "payload": {
+                            "summary": "Customer at risk of churning",
+                            "timestamp": "2023-07-24T15:05:00Z",
+                            "severity": "warning",
+                            "source": "Sentiment Analysis",
+                            "component": "Customer",
+                            "group": "marketing",
+                            "class": "risk",
+                            "custom_details": {
+                                "churn_score": "0.85",
+                                "environment": "production",
+                                "team": "marketing",
+                                "customer_id": "12345"
+                            }
+                        },
+                        "routing_key": "DYNAMIC",
+                        "dedup_key": "customer/12345/churn",
+                        "event_action": "trigger",
+                        "client": "Sentiment Analysis",
+                        "client_url": "https://example.com",
+                        "links": [],
+                        "images": []
+                    }
+                }
+                
+            ],
+            "Well Understood": [
+                { 
+                title: "Kubernetes Pods", 
+                description: "Crash Loop Back Off", 
+                category: "Well Understood",
+                payload: { 
+                    "payload": {
+                        "summary": "Kubernetes Pod CrashLoopBackOff - payment-service",
+                        "timestamp": "2025-03-25T12:45:00Z",
+                        "severity": "error",
+                        "source": "Kubernetes Cluster - production",
+                        "class": "CrashLoopBackOff",
+                        "component": "payment-service",
+                        "group": "k8s-production",
+                        "custom_details": {
+                        "message": "Pod payment-service-7f9d9b7c8f-x2y4z is stuck in CrashLoopBackOff.",
+                        "handled": true,
+                        "cluster": "prod-cluster",
+                        "namespace": "payments",
+                        "node": "ip-192-168-1-15.ec2.internal",
+                        "restartCount": 5,
+                        "lastState": "Terminated - Exit Code 137 (Out of Memory)",
+                        "sla_impact": "Medium - Affects payment processing",
+                        "previous_incidents": [
+                            {
+                            "id": "INC-20250322-K8S-CRASH-004",
+                            "timestamp": "2025-03-22T08:15:00Z",
+                            "status": "resolved"
+                            }
+                        ],
+                        "recommended_action": "Auto-remediation triggered to restart the pod and increase resource limits."
+                        }
+                    },
+                    "routing_key": "DYNAMIC",
+                    "dedup_key": "INC-20250325-K8S-CRASH-005",
+                    "event_action": "trigger",
+                    "client": "Kubernetes Monitoring",
+                    "client_url": "https://k8s-dashboard.company.com/namespaces/payments/pods/payment-service-7f9d9b7c8f-x2y4z",
+                    "links": [
+                        {
+                        "href": "https://confluence.company.com/pages/viewpage.action?pageId=K8s-CrashLoopBackOff-Runbook",
+                        "text": "CrashLoopBackOff Runbook"
+                        },
+                        {
+                        "href": "https://grafana.company.com/dashboards/k8s-pod-metrics",
+                        "text": "Kubernetes Pod Metrics Dashboard"
+                        }
+                    ],
+                    "images": [
+                        {
+                        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/PagerDuty_Logo.svg/512px-PagerDuty_Logo.svg.png",
+                        "href": "https://www.pagerduty.com",
+                        "alt": "PagerDuty Logo"
+                        }
+                    ],
+                    "automation_script": {
+                        "name": "restart_crashloopbackoff_pod.sh",
+                        "execution_method": "Kubernetes Job",
+                        "script_location": "https://github.com/company/infra-scripts/blob/main/restart_crashloopbackoff_pod.sh",
+                        "expected_execution_time": "1 minute",
+                        "rollback_plan": "If pod fails again, trigger rollback to previous deployment."
+                    }
+                }
+                },
+                {
+                title: "Log file growth", 
+                description: "Greater than a limit", 
+                category: "Well Understood",
+                payload: {
+                    "payload": {
+                        "summary": "Log File Growth Exceeded Limit on Web Server",
+                        "timestamp": "2025-03-25T14:10:00Z",
+                        "severity": "warning",
+                        "source": "Log Monitoring - Web Server",
+                        "class": "LogFileGrowth",
+                        "component": "web-server",
+                        "group": "production",
+                        "custom_details": {
+                        "message": "Log file /var/log/webserver/access.log has exceeded the configured size limit of 500MB.",
+                        "handled": true,
+                        "project": "web-server",
+                        "releaseStage": "production",
+                        "log_file": "/var/log/webserver/access.log",
+                        "current_size": "650MB",
+                        "size_limit": "500MB",
+                        "server": "web-prod-01",
+                        "environment": "production",
+                        "sla_impact": "Medium - Could lead to disk space issues if left unresolved.",
+                        "previous_incidents": [
+                            {
+                            "id": "INC-20250322-LOG-001",
+                            "timestamp": "2025-03-22T10:00:00Z",
+                            "status": "resolved"
+                            },
+                            {
+                            "id": "INC-20250315-LOG-002",
+                            "timestamp": "2025-03-15T16:45:00Z",
+                            "status": "resolved"
+                            }
+                        ],
+                        "recommended_action": "Auto-remediation triggered to rotate log files and free up disk space."
+                        }
+                    },
+                    "routing_key": "DYNAMIC",
+                    "dedup_key": "INC-20250325-LOG-003",
+                    "event_action": "trigger",
+                    "client": "Log Monitoring",
+                    "client_url": "https://logs.company.com/view/access.log/web-prod-01",
+                    "links": [
+                        {
+                        "href": "https://confluence.company.com/pages/viewpage.action?pageId=Log-Rotation-Runbook",
+                        "text": "Log Rotation Runbook"
+                        },
+                        {
+                        "href": "https://github.com/company/infra-scripts/blob/main/log_rotation.sh",
+                        "text": "Log Rotation Automation Script"
+                        }
+                    ],
+                    "images": [
+                        {
+                        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/PagerDuty_Logo.svg/512px-PagerDuty_Logo.svg.png",
+                        "href": "https://www.pagerduty.com",
+                        "alt": "PagerDuty Logo"
+                        }
+                    ],
+                    "automation_script": {
+                        "name": "log_rotation.sh",
+                        "execution_method": "Cron Job",
+                        "script_location": "https://github.com/company/infra-scripts/blob/main/log_rotation.sh",
+                        "expected_execution_time": "Instant",
+                        "rollback_plan": "If log rotation fails, free up disk space manually and investigate the cause."
+                    }
+                    }
+                },
+                {
+                title: "SSL Certificate Expiry", 
+                description: "Warning", 
+                category: "Well Understood",
+                payload: {
+                    "payload": {
+                        "summary": "SSL Certificate Expiry Warning for Web Server",
+                        "timestamp": "2025-03-25T15:30:00Z",
+                        "severity": "warning",
+                        "source": "SSL Certificate Monitoring - Web Server",
+                        "class": "SSLExpiry",
+                        "component": "web-server",
+                        "group": "production",
+                        "custom_details": {
+                        "message": "SSL certificate for domain example.com is set to expire in 7 days.",
+                        "handled": false,
+                        "project": "web-server",
+                        "releaseStage": "production",
+                        "certificate": "example.com",
+                        "expiry_date": "2025-04-01",
+                        "days_until_expiry": 7,
+                        "server": "web-prod-01",
+                        "environment": "production",
+                        "sla_impact": "High - SSL expiry can cause users to lose secure access to the site.",
+                        "certificate_authority": "DigiCert",
+                        "certificate_type": "SSL/TLS",
+                        "renewal_url": "https://www.digicert.com/ssl-certificate-renewal"
+                        }
+                    },
+                    "routing_key": "DYNAMIC",
+                    "dedup_key": "SSL-EXP-20250325-WEB",
+                    "event_action": "trigger",
+                    "client": "SSL Certificate Monitoring",
+                    "client_url": "https://www.digicert.com/ssl-certificate-renewal",
+                    "links": [
+                        {
+                        "href": "https://example.com/ssl-certificate-details",
+                        "text": "View SSL Certificate Details"
+                        },
+                        {
+                        "href": "https://www.digicert.com/ssl-certificate-renewal",
+                        "text": "SSL Certificate Renewal"
+                        }
+                    ],
+                    "images": [
+                        {
+                        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/PagerDuty_Logo.svg/512px-PagerDuty_Logo.svg.png",
+                        "href": "https://www.pagerduty.com",
+                        "alt": "PagerDuty Logo"
+                        }
+                    ],
+                    "automation_script": {
+                        "name": "ssl_certificate_renewal.sh",
+                        "execution_method": "Manual or Scheduled Automation",
+                        "script_location": "https://github.com/company/infra-scripts/blob/main/ssl_certificate_renewal.sh",
+                        "expected_execution_time": "Instant",
+                        "rollback_plan": "If automatic renewal fails, escalate for manual intervention to ensure the certificate is renewed before expiry."
+                    }
+                    }
+                }
+
+]
+};
+    
+    const categoriesList = document.getElementById('categories');
+    const cardContainer = document.getElementById('cardContainer');
+    const routingKeyInput = document.getElementById('routingKey');
+    const toggleRoutingKeyBtn = document.getElementById('toggleRoutingKey');
+    const triggerBtn = document.getElementById('triggerBtn');
+    const modal = document.getElementById('editModal');
+    const saveJsonBtn = document.getElementById('saveJson');
+    const helpIcon = document.getElementById('helpIcon');
+    const helpPopup = document.getElementById('helpPopup');
+    const resetJsonBtn = document.getElementById('resetJson');
+    const cancelJsonBtn = document.getElementById('cancelJson');
+    const pdfPath = 'PagerDuty.pdf';
+
+    let editor = null;
+
+    let currentCategory = "Presentation";
+    let currentEditingCard = null;
+
+    // Initialize Materialize components and CodeMirror
+    document.addEventListener('DOMContentLoaded', function() {
+        M.AutoInit();
+        populateCategories();
+        renderCards();
+
+        editor = CodeMirror.fromTextArea(document.getElementById('jsonEditor'), {
+            mode: { name: "javascript", json: true },
+            theme: "material-darker",
+            lineNumbers: true,
+            autoCloseBrackets: true,
+            matchBrackets: true,
+            gutters: ["CodeMirror-lint-markers"],
+            lint: true,
+            autoRefresh: true
+        });
+        editor.setSize("100%", 400);
+    });
+
+    function populateCategories() {
+        categoriesList.innerHTML = '';
+        categories.forEach((category, index) => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = '#!';
+            a.innerHTML = `${category.icon} ${category.name}`;
+            a.onclick = () => switchCategory(category.name);
+            if (currentCategory === category.name) a.classList.add('active');
+            li.appendChild(a);
+            categoriesList.appendChild(li);
+        });
+    }
+
+    function switchCategory(categoryName) {
+        currentCategory = categoryName;
+        populateCategories();
+        renderCards();
+    }
+
+    function renderCards() {
+        cardContainer.innerHTML = '';
+        let itemsToRender = [];
+        if (currentCategory === 'All') {
+            categories.forEach(category => {
+                if (payloads[category.name] && category.name !== 'All') {
+                    payloads[category.name].forEach((item, idx) => {
+                        itemsToRender.push({ ...item, category: category.name, index: idx });
+                    });
+                }
+            });
+        } else {
+            itemsToRender = (payloads[currentCategory] || []).map((item, idx) => ({ ...item, category: currentCategory, index: idx }));
+        }
+
+        itemsToRender.forEach((item) => {
+            const cardCol = document.createElement('div');
+            cardCol.className = 'col s12 m6 l4';
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card hoverable';
+            cardDiv.onclick = (e) => {
+                if (e.target.type !== 'checkbox') {
+                    openModal(item);
+                }
+            };
+            cardDiv.dataset.category = item.category;
+            cardDiv.dataset.index = item.index;
+
+            const cardContent = document.createElement('div');
+            cardContent.className = 'card-content';
+
+            const cardIcon = document.createElement('span');
+            cardIcon.className = 'card-title';
+
+            const iconSpan = document.createElement('span');
+            iconSpan.textContent = categories.find(c => c.name === item.category).icon + ' ';
+
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = item.title;
+
+            cardIcon.appendChild(iconSpan);
+            cardIcon.appendChild(titleSpan);
+
+            const cardDesc = document.createElement('p');
+            cardDesc.textContent = item.description;
+
+            cardContent.appendChild(cardIcon);
+            cardContent.appendChild(cardDesc);
+
+            const cardAction = document.createElement('div');
+            cardAction.className = 'card-action';
+            const label = document.createElement('label');
+            label.innerHTML = '<input type="checkbox" class="filled-in" checked="checked" /><span>Execute</span>';
+            cardAction.appendChild(label);
+
+            cardDiv.appendChild(cardContent);
+            cardDiv.appendChild(cardAction);
+            cardCol.appendChild(cardDiv);
+            cardContainer.appendChild(cardCol);
+        });
+    }
+
+    function openModal(item) {
+        currentEditingCard = item;
+        editor.setValue(JSON.stringify(item.payload, null, 2));
+        const instance = M.Modal.getInstance(modal);
+        instance.open();
+        editor.refresh();
+    }
+
+    saveJsonBtn.onclick = () => {
+        try {
+            const updatedPayload = JSON.parse(editor.getValue());
+            payloads[currentEditingCard.category][currentEditingCard.index].payload = updatedPayload;
+            const instance = M.Modal.getInstance(modal);
+            instance.close();
+            M.toast({html: 'Payload updated successfully!', classes: 'green'});
+        } catch (error) {
+            M.toast({html: 'Invalid JSON. Please check your input.', classes: 'red'});
+        }
+    };
+
+    resetJsonBtn.onclick = () => {
+        editor.setValue(JSON.stringify(currentEditingCard.payload, null, 2));
+        M.toast({html: 'JSON payload reset to original.', classes: 'blue'});
+    };
+
+    cancelJsonBtn.onclick = () => {
+        const instance = M.Modal.getInstance(modal);
+        instance.close();
+    };
+
+    triggerBtn.onclick = () => {
+        const routingKey = routingKeyInput.value.trim();
+        if (!routingKey) {
+            M.toast({html: 'Please enter a routing key', classes: 'red'});
+            return;
+        }
+
+        const selectedCards = Array.from(document.querySelectorAll('.card'))
+            .filter(card => {
+                const checkbox = card.querySelector('input[type="checkbox"]');
+                return checkbox && checkbox.checked;
+            });
+
+        if (selectedCards.length === 0) {
+            M.toast({html: 'Please select at least one event to trigger.', classes: 'red'});
+            return;
+        }
+
+        const selectedPayloads = selectedCards.map(card => {
+            const category = card.dataset.category;
+            const index = card.dataset.index;
+            const item = payloads[category][index];
+            const payloadClone = JSON.parse(JSON.stringify(item.payload));
+            payloadClone.routing_key = routingKey;
+            return payloadClone;
+        });
+
+        selectedPayloads.forEach(payload => {
+            fetch('https://events.pagerduty.com/v2/enqueue', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json().then(data => {
+                        console.log('Success:', data);
+                        M.toast({html: 'Event triggered successfully!', classes: 'green'});
+                    });
+                } else {
+                    return response.text().then(text => {
+                        throw new Error(text || 'Unknown error occurred');
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error.message);
+                M.toast({html: `Failed to trigger event: ${error.message}`, classes: 'red'});
+            });
+        });
+
+        M.toast({html: `Triggering ${selectedPayloads.length} event(s)`, classes: 'blue'});
+    };
+
+    // Removed the findItemByTitle function since it's no longer needed
+
+    function setRoutingKeyCookie(value) {
+        document.cookie = `routingKey=${encodeURIComponent(value)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; SameSite=Strict`;
+    }
+
+    function getRoutingKeyCookie() {
+        const name = "routingKey=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+        for(let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i].trim();
+            if (cookie.indexOf(name) === 0) {
+                return cookie.substring(name.length, cookie.length);
+            }
+        }
+        return "";
+    }
+
+    toggleRoutingKeyBtn.onclick = () => {
+        if (routingKeyInput.type === "password") {
+            routingKeyInput.type = "text";
+            toggleRoutingKeyBtn.innerHTML = '<i class="material-icons">visibility_off</i>';
+        } else {
+            routingKeyInput.type = "password";
+            toggleRoutingKeyBtn.innerHTML = '<i class="material-icons">visibility</i>';
+        }
+    };
+
+    routingKeyInput.onchange = () => {
+        setRoutingKeyCookie(routingKeyInput.value);
+    };
+
+    window.onload = () => {
+        const savedRoutingKey = getRoutingKeyCookie();
+        if (savedRoutingKey) {
+            routingKeyInput.value = savedRoutingKey;
+            routingKeyInput.type = "password";
+        }
+    };
+
+    helpIcon.onclick = () => {
+        helpPopup.classList.toggle('show');
+    };
+
+    window.onclick = (event) => {
+        if (!event.target.matches('.help-icon') && !event.target.closest('.help-popup')) {
+            helpPopup.classList.remove('show');
+        }
+    };
+
+    function switchCategory(categoryName) {
+            currentCategory = categoryName;
+            populateCategories();
+            renderCards();
+
+            // Special handling for Presentation category
+            if (categoryName === 'Presentation') {
+                document.getElementById('pdfContainer').style.display = 'block';
+                document.getElementById('pdfIframe').src = pdfPath; // Replace with your PDF path
+            } else {
+                document.getElementById('pdfContainer').style.display = 'none';
+            }
+        }
+</script>
+</body>
+</html>
