@@ -200,7 +200,7 @@
     <ul id="slide-out" class="sidenav sidenav-fixed">
         <li>
             <div class="user-view center-align">
-                <a href="#!" class="brand-logo center">
+                <a href="https://press4ack.com" class="brand-logo center">
                     <img src="https://info.pagerduty.com/rs/093-VPJ-807/images/pdot-logo.png?version=0" 
                         alt="PagerDuty Logo" class="pagerduty-logo">
                     <span class="logo-text">Sydney 2025</span>
@@ -286,7 +286,8 @@
             //{ name: "SolarWinds", icon: "☀️" },
             //{ name: "CrowdStrike", icon: "🦅" },
             //{ name: "Customer Sentiment", icon: "😊" },
-            { name: "All", icon: "🌐" }
+            { name: "All", icon: "🌐" },
+            { name: "Today's Links", icon: "🔗" }
         ];
         
         const payloads = {
@@ -527,62 +528,11 @@
                     }
                 }
             ],
-            "Prometheus": [
+            "Today's Links": [
                 { 
-                    title: "High Latency", 
-                    description: "API latency exceeds SLA", 
-                    category: "Prometheus",
-                    payload: { 
-                        "payload": {
-                            "summary": "High API latency detected on /v1/orders",
-                            "timestamp": "2023-07-24T14:30:00Z",
-                            "severity": "critical",
-                            "source": "/v1/orders",
-                            "component": "API",
-                            "group": "backend",
-                            "class": "performance",
-                            "custom_details": {
-                                "latency_ms": "1200",
-                                "environment": "production",
-                                "team": "api"
-                            }
-                        },
-                        "routing_key": "DYNAMIC",
-                        "dedup_key": "/v1/orders/latency",
-                        "event_action": "trigger",
-                        "client": "Prometheus",
-                        "client_url": "https://prometheus.io",
-                        "links": [],
-                        "images": []
-                    }
-                },
-                { 
-                    title: "Disk Space Low", 
-                    description: "Disk usage above 85%", 
-                    category: "Prometheus",
-                    payload: { 
-                        "payload": {
-                            "summary": "Low disk space on db-server-3",
-                            "timestamp": "2023-07-24T14:35:00Z",
-                            "severity": "warning",
-                            "source": "db-server-3",
-                            "component": "Disk",
-                            "group": "infrastructure",
-                            "class": "capacity",
-                            "custom_details": {
-                                "disk_percent": "87.3%",
-                                "environment": "production",
-                                "team": "infrastructure"
-                            }
-                        },
-                        "routing_key": "DYNAMIC",
-                        "dedup_key": "db-server-3/disk",
-                        "event_action": "trigger",
-                        "client": "Prometheus",
-                        "client_url": "https://prometheus.io",
-                        "links": [],
-                        "images": []
-                    }
+                    title: "PagerDuty - https://bit.ly/4iPCaDm ", 
+                    description: "Runbook Autumation - https://bit.ly/4hYZ5ux", 
+                    category: "Today's Links"
                 }
             ],
             "SolarWinds": [
