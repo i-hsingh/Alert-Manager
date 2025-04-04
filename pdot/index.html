@@ -194,6 +194,43 @@
             background: white;
         }
 
+         /* Responsive Styles */
+         @media screen and (max-width: 768px) {
+            .sidenav {
+                position: fixed;
+                width: 100%;
+                height: auto;
+                top: 0;
+                left: -100%;
+                transition: left 0.3s ease-in-out;
+                z-index: 1000;
+            }
+            
+            .sidenav.show {
+                left: 0;
+            }
+            
+            main {
+                margin-left: 0;
+                padding-top: 60px; /* Adjust for fixed sidenav */
+            }
+
+            .row {
+                flex-direction: column; /* Stack cards vertically */
+                align-items: center; /* Center cards */
+            }
+
+            .card {
+                width: 90%; /* Adjust card width */
+                margin-bottom: 20px; /* Add space between cards */
+            }
+        }
+
+        img {
+            max-width: 100%;
+            height: auto; /* Ensure images are responsive */
+        }
+
     </style>
 </head>
 <body>
