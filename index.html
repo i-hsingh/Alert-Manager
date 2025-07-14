@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PagerDuty Industry Demo Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .pd-key-container {
+      margin: 24px auto 32px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .pd-key-label {
+      font-weight: 600;
+      color: #263238;
+    }
+    .pd-key-input {
+      padding: 8px 12px;
+      border: 1px solid #bdbdbd;
+      border-radius: 6px;
+      font-size: 1em;
+      width: 260px;
+    }
+    .pd-key-btn {
+      background: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .pd-key-btn:hover {
+      background: #388e3c;
+    }
+    .pd-key-status {
+      margin-left: 10px;
+      color: #388e3c;
+      font-size: 0.98em;
+    }
+    body {
+      background: #f6f8fa;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .header {
+      margin-top: 48px;
+      text-align: center;
+    }
+    .logo {
+      width: 220px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      color: #263238;
+      font-size: 2.4em;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .subtitle {
+      color: #4caf50;
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      font-weight: 500;
+    }
+    .nav {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(44, 62, 80, 0.08);
+      padding: 32px 36px;
+      text-decoration: none;
+      color: #263238;
+      font-size: 1.15em;
+      font-weight: 600;
+      transition: box-shadow 0.2s, transform 0.2s;
+      min-width: 160px;
+      border: 2px solid #e0e0e0;
+    }
+    .nav a:hover {
+      box-shadow: 0 8px 32px rgba(44, 62, 80, 0.16);
+      border-color: #4caf50;
+      transform: translateY(-4px) scale(1.03);
+      color: #388e3c;
+    }
+    .nav-icon {
+      font-size: 2.2em;
+      margin-bottom: 12px;
+      color: #4caf50;
+    }
+    .footer {
+      margin-top: auto;
+      padding: 24px 0 12px 0;
+      color: #90a4ae;
+      font-size: 0.95em;
+      text-align: center;
+    }
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .nav a {
+        min-width: 0;
+        width: 90vw;
+      }
+    }
+  </style>
+  <!-- Material Icons CDN for icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+    <img class="logo" src="PagerDuty.png" alt="PagerDuty Logo">
+    <h1>Solution Consulting Demo Portal</h1>
+    <div class="subtitle">See PagerDuty in action for different industries</div>
+  </div>
+  <div class="pd-key-container">
+    <label for="pd-key" class="pd-key-label">PagerDuty API Key:</label>
+    <input type="password" id="pd-key" class="pd-key-input" placeholder="Enter your PD API key">
+    <button onclick="savePDKey()" class="pd-key-btn">Save</button>
+    <span id="pd-key-status" class="pd-key-status"></span>
+  </div>
+  <div class="nav">
+    <a href="Shopping.html">
+      <span class="material-icons nav-icon">shopping_cart</span>
+      Retail Demo
+    </a>
+    <a href="Bank.html">
+      <span class="material-icons nav-icon">account_balance</span>
+      Banking Demo
+    </a>
+    <a href="Holiday.html">
+      <span class="material-icons nav-icon">beach_access</span>
+      Holiday Demo
+    </a>
+    <a href="Telco.html">
+      <span class="material-icons nav-icon">cell_tower</span>
+      Telco Demo
+    </a>
+    <a href="TriggerEvents.html">
+      <span class="material-icons nav-icon">person</span>
+      AE Demo
+    </a>
+    <a href="PDOT.html">
+      <span class="material-icons nav-icon">hub</span>
+      PDOT
+    </a>
+  </div>
+  <div class="footer">
+    &copy; 2025 PagerDuty Demo Portal &mdash; For Internal Use Only
+  </div>
+  <script>
+    function savePDKey() {
+      const key = document.getElementById('pd-key').value;
+      if (key.trim() === "") {
+        document.getElementById('pd-key-status').textContent = "Please enter a key.";
+        document.getElementById('pd-key-status').style.color = "#d32f2f";
+        return;
+      }
+      localStorage.setItem('pagerduty_api_key', key);
+      document.getElementById('pd-key-status').textContent = "Saved!";
+      document.getElementById('pd-key-status').style.color = "#388e3c";
+    }
+  </script>
+</body>
+</html>

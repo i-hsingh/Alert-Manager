@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SecureBank Dashboard</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1565c0;
+      --primary-dark: #0d47a1;
+      --accent: #4caf50;
+      --bg: #f4f7fa;
+      --card-bg: #fff;
+      --text: #263238;
+      --muted: #90a4ae;
+      --border: #e3e7ed;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .bank-app {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 0 0 0;
+      min-height: 100vh;
+      box-shadow: 2px 0 8px rgba(21,101,192,0.05);
+      position: relative;
+    }
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .sidebar .logo img {
+      width: 120px;
+      margin-bottom: 8px;
+    }
+    .sidebar .nav {
+      flex: 1;
+    }
+    .sidebar .nav a {
+      display: flex;
+      align-items: center;
+      padding: 14px 32px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08em;
+      transition: background 0.15s;
+      border-left: 4px solid transparent;
+    }
+    .sidebar .nav a.active,
+    .sidebar .nav a:hover {
+      background: rgba(255,255,255,0.08);
+      border-left: 4px solid var(--accent);
+    }
+    .sidebar .nav i {
+      margin-right: 18px;
+      font-size: 1.5em;
+    }
+    .sidebar .logout {
+      margin: 32px 0 0 0;
+      padding: 0 32px;
+    }
+    .sidebar .logout a {
+      color: #fff;
+      opacity: 0.7;
+      font-size: 0.98em;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      transition: opacity 0.2s;
+    }
+    .sidebar .logout a:hover {
+      opacity: 1;
+    }
+    .sidebar .logout i {
+      margin-right: 10px;
+    }
+    /* Main content */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      min-height: 100vh;
+      position: relative;
+    }
+    .topbar {
+      background: #fff;
+      padding: 0 36px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .bank-title {
+      font-size: 1.35em;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+    }
+    .topbar .bank-title i {
+      font-size: 1.3em;
+      margin-right: 10px;
+      color: var(--accent);
+    }
+    .topbar .user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topbar .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+    }
+    .topbar .user-name {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 1.05em;
+    }
+    .dashboard {
+      padding: 36px 36px 24px 36px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      background: var(--bg);
+    }
+    .dashboard-cards {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(21,101,192,0.06);
+      padding: 28px 32px;
+      flex: 1 1 320px;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.15em;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+    .balance {
+      font-size: 2.1em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+    .card .account-num {
+      color: var(--muted);
+      font-size: 0.98em;
+      margin-bottom: 4px;
+    }
+    .quick-actions {
+      display: flex;
+      gap: 18px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .quick-action {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 10px;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px rgba(21,101,192,0.08);
+      transition: background 0.18s, transform 0.18s;
+      min-width: 110px;
+      border: none;
+      outline: none;
+    }
+    .quick-action i {
+      font-size: 2em;
+      margin-bottom: 6px;
+      color: var(--accent);
+      transition: color 0.18s;
+    }
+    .quick-action:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+    }
+    .quick-action:hover i {
+      color: #fff;
+    }
+    .transactions-card {
+      flex: 2 1 480px;
+      min-width: 320px;
+    }
+    .transactions-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .transaction {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.13s;
+    }
+    .transaction:last-child {
+      border-bottom: none;
+    }
+    .transaction:hover {
+      background: #f0f6fa;
+    }
+    .transaction .details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .transaction .merchant {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .transaction .date {
+      color: var(--muted);
+      font-size: 0.97em;
+    }
+    .transaction .amount {
+      font-weight: 600;
+      font-size: 1.08em;
+    }
+    .transaction .amount.negative {
+      color: #e53935;
+    }
+    .transaction .amount.positive {
+      color: #43a047;
+    }
+    /* Loading overlay */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.18);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    .loading-spinner {
+      width: 54px;
+      height: 54px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    /* Footer */
+    .footer {
+      width: 100%;
+      background: #fff;
+      color: var(--muted);
+      text-align: center;
+      font-size: 1em;
+      padding: 20px 0 12px 0;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      letter-spacing: 0.01em;
+    }
+    @media (max-width: 900px) {
+      .dashboard-cards {
+        flex-direction: column;
+        gap: 24px;
+      }
+      .dashboard {
+        padding: 24px 8px 16px 8px;
+      }
+      .sidebar {
+        display: none;
+      }
+      .main {
+        width: 100vw;
+      }
+    }
+    @media (max-width: 600px) {
+      .dashboard {
+        padding: 12px 2vw 8px 2vw;
+      }
+      .topbar {
+        padding: 0 10px;
+      }
+      .card {
+        padding: 16px 10px;
+      }
+      .footer {
+        font-size: 0.98em;
+        padding: 16px 0 8px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bank-app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="PagerDuty.png" alt="PagerDuty Logo">
+        <div style="font-size:1.1em;font-weight:700;letter-spacing:1px;">SecureBank</div>
+      </div>
+      <nav class="nav">
+        <a href="#" class="active"><i class="material-icons">dashboard</i>Dashboard</a>
+        <a href="#"><i class="material-icons">account_balance</i>Accounts</a>
+        <a href="#"><i class="material-icons">payment</i>Payments</a>
+        <a href="#"><i class="material-icons">swap_horiz</i>Transfers</a>
+        <a href="#"><i class="material-icons">credit_card</i>Cards</a>
+        <a href="#"><i class="material-icons">settings</i>Settings</a>
+      </nav>
+      <div class="logout">
+        <a href="#"><i class="material-icons">logout</i>Logout</a>
+      </div>
+    </aside>
+    <!-- Main Content -->
+    <div class="main">
+      <!-- Top Bar -->
+      <div class="topbar">
+        <div class="bank-title"><i class="material-icons">account_balance</i>SecureBank Online</div>
+        <div class="user">
+          <span class="user-name">John Doe</span>
+          <img class="user-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
+        </div>
+      </div>
+      <!-- Dashboard -->
+      <div class="dashboard">
+        <div class="dashboard-cards">
+          <!-- Account Balances -->
+          <div class="card">
+            <h3>Checking Account</h3>
+            <div class="balance">$12,345.67</div>
+            <div class="account-num">Account: **** 1234</div>
+            <div class="quick-actions">
+              <button class="quick-action" data-action="transfer"><i class="material-icons">swap_horiz</i>Transfer</button>
+              <button class="quick-action" data-action="pay"><i class="material-icons">payment</i>Pay Bills</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Savings Account</h3>
+            <div class="balance">$12,222.22</div>
+            <div class="account-num">Account: **** 5678</div>
+            <div class="quick-actions">
+              <button class="quick-action" data-action="deposit"><i class="material-icons">add_circle</i>Deposit</button>
+              <button class="quick-action" data-action="cards"><i class="material-icons">credit_card</i>Cards</button>
+            </div>
+          </div>
+          <!-- Recent Transactions -->
+          <div class="card transactions-card">
+            <h3>Recent Transactions</h3>
+            <ul class="transactions-list">
+              <li class="transaction" data-transaction="1">
+                <div class="details">
+                  <span class="merchant">Amazon.com</span>
+                  <span class="date">Apr 26, 2025</span>
+                </div>
+                <span class="amount negative">-$99.99</span>
+              </li>
+              <li class="transaction" data-transaction="2">
+                <div class="details">
+                  <span class="merchant">Salary Deposit</span>
+                  <span class="date">Apr 25, 2025</span>
+                </div>
+                <span class="amount positive">+$3,500.00</span>
+              </li>
+              <li class="transaction" data-transaction="3">
+                <div class="details">
+                  <span class="merchant">Grocery Store</span>
+                  <span class="date">Apr 24, 2025</span>
+                </div>
+                <span class="amount negative">-$156.78</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Loading Overlay -->
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+      </div>
+      <!-- Footer -->
+      <footer class="footer">
+        &copy; 2025 PagerDuty Demo Portal &mdash; For internal demo use only
+      </footer>
+    </div>
+  </div>
+  <!-- Toasts -->
+  <div id="toast" style="display:none;position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#323232;color:#fff;padding:14px 32px;border-radius:8px;font-size:1.08em;z-index:99999;box-shadow:0 2px 8px rgba(0,0,0,0.18);"></div>
+  <script>
+    // Toast helper
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 2600);
+    }
+
+    // Alert payloads for different banking actions
+    const alertPayloads = {
+      transfer: {
+        payload: {
+          summary: "Money Transfer Service Degraded - Latency {{int(2000,5000)}}ms",
+          severity: "warning",
+          source: "transfer-service",
+          class: "ServiceDegradation",
+          component: "money-transfer",
+          group: "Banking-Core",
+          custom_details: {
+            latency: "{{int(2000,5000)}}ms",
+            affected_operations: "domestic-transfer",
+            error_rate: "{{int(5,15)}}%",
+            impact: "Delayed transfer processing"
+          }
+        }
+      },
+      login: {
+        payload: {
+          summary: "Failed Login Attempts Detected - {{int(5,20)}} attempts",
+          severity: "critical",
+          source: "auth-service",
+          class: "SecurityAlert",
+          component: "login",
+          group: "Banking-Security",
+          custom_details: {
+            attempts: "{{int(5,20)}}",
+            ip_address: "suspicious",
+            impact: "Potential unauthorized access attempt",
+            location: "Multiple regions"
+          }
+        }
+      },
+      payment: {
+        payload: {
+          summary: "Payment Processing Error - Success rate {{int(60,85)}}%",
+          severity: "critical",
+          source: "payment-gateway",
+          class: "TransactionFailure",
+          component: "payment-processor",
+          group: "Banking-Core",
+          custom_details: {
+            success_rate: "{{int(60,85)}}%",
+            affected_services: "bill-pay, merchant-payment",
+            transaction_type: "payment",
+            impact: "Failed payment transactions",
+            message: "Payment service experiencing {{int(60,85)}}% transaction failure rate over the last 5 minutes",
+            service: "payment-gateway-prod",
+            namespace: "financial-services",
+            node: "payment-proc-pod-east1-001",
+            failureCount: 1456,
+            lastSuccessfulTransaction: "2025-04-27T14:25:00Z",
+            sla_impact: "Critical - Payment Processing Blocked",
+            recommended_action: "Immediate investigation required - Possible payment processor endpoint failure",
+            error_details: {
+                error_code: "PAY-503",
+                error_type: "CONNECTION_TIMEOUT",
+                affected_endpoints: [
+                    "api.payment-processor.com/v1/transactions",
+                    "api.payment-processor.com/v1/status"
+                ],
+                response_time: "15000ms",
+                http_status: 503
+            },
+            business_impact: {
+                revenue_risk: "High",
+                customer_impact: "All payment transactions affected",
+                transaction_value_at_risk: "$2.5M/hour"
+            }
+          }
+        }
+      },
+      database: {
+        payload: {
+          summary: "web-app01-db01 running low on disk space: {{int(2,5)}}% free - application failure threshold warning",
+          source: "Dynatrace",
+          event_action: "trigger",
+          severity: "critical",
+          source: "database-cluster",
+          class: "Infrastructure",
+          component: "main-db",
+          group: "Banking-Infrastructure",
+          custom_details: {
+            affected_nodes: "{{int(2,5)}}",
+            response_time: "{{int(500,2000)}}ms",
+            impact: "Slow transaction processing",
+            replication_lag: "{{int(30,120)}}s"
+          }
+        }
+      }
+    };
+
+    // Helper function to replace random templates
+    function replaceRandomTemplates(str) {
+      return str.replace(/{{int\((\d+),\s*(\d+)\)}}/g, function(match, min, max) {
+        min = parseInt(min);
+        max = parseInt(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      });
+    }
+
+    // Show loading overlay
+    function showLoading() {
+      document.getElementById('loadingOverlay').style.display = 'flex';
+    }
+    // Hide loading overlay
+    function hideLoading() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    // Trigger PagerDuty alert
+    async function triggerPagerDutyAlert(alertType) {
+      // Retrieve the PD key from localStorage set by index.html
+      const pdKey = localStorage.getItem('pagerduty_api_key');
+      if (!pdKey) {
+        showToast('PagerDuty key not found. Please return to the portal and set your PD key.');
+        return;
+      }
+      const payload = alertPayloads[alertType];
+      if (!payload) return;
+      showLoading();
+      try {
+        const processedPayload = {
+          routing_key: pdKey,
+          event_action: "trigger",
+          payload: JSON.parse(replaceRandomTemplates(JSON.stringify(payload.payload)))
+        };
+        const response = await fetch('https://events.pagerduty.com/v2/enqueue', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(processedPayload)
+        });
+        if (response.ok) {
+          showToast('Error!!! Please Try Again.');
+        } else {
+          throw new Error('Failed to trigger alert');
+        }
+      } catch (error) {
+        showToast(`Error: ${error.message}`);
+      } finally {
+        hideLoading();
+      }
+    }
+
+    // Add click handlers for quick actions
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.quick-action').forEach(button => {
+        button.addEventListener('click', function() {
+          const action = this.dataset.action;
+          if (action === 'transfer' || action === 'pay') {
+            triggerPagerDutyAlert(action === 'pay' ? 'payment' : 'transfer');
+          }
+          showLoading();
+          setTimeout(hideLoading, 1200);
+        });
+      });
+      document.querySelectorAll('.transactions-list .transaction').forEach(item => {
+        item.addEventListener('click', function() {
+          triggerPagerDutyAlert('database');
+        });
+      });
+      // Simulate occasional login issues
+      setInterval(() => {
+        if (Math.random() < 0.1) { // 10% chance every 30 seconds
+          triggerPagerDutyAlert('login');
+        }
+      }, 30000);
+    });
+  </script>
+</body>
+</html>

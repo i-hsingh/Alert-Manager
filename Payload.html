@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generic Alert Payload Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f5f7fa;
+      color: #2e3a43;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 820px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(84,110,122,0.08);
+      padding: 32px 28px;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 18px;
+      color: #546e7a;
+      font-weight: 700;
+    }
+    .payload-section {
+      margin-bottom: 32px;
+    }
+    label {
+      font-weight: 600;
+      color: #37474f;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .sample {
+      font-size: 0.98em;
+      color: #90a4ae;
+      margin-bottom: 6px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      background: #f9fafb;
+      border-radius: 6px;
+      padding: 8px 10px;
+      white-space: pre-wrap;
+    }
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #e3e8ee;
+      padding: 12px;
+      margin-bottom: 8px;
+      background: #f9fafb;
+      resize: vertical;
+      transition: border 0.2s;
+    }
+    textarea:focus {
+      border: 1.5px solid #a7c7e7;
+      outline: none;
+    }
+    .btn {
+      background: #546e7a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.18s;
+    }
+    .btn:hover {
+      background: #37474f;
+    }
+    .status {
+      margin-top: 18px;
+      font-size: 1.08em;
+      color: #43a047;
+      font-weight: 600;
+      display: none;
+    }
+    .error {
+      color: #e53935;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 12px 2vw;
+      }
+      h1 {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Generic Alert Payload Editor</h1>
+    <form id="payloadForm">
+      <div class="payload-section">
+        <label for="payload1">Payload 1</label>
+        <div class="sample">// Sample:<br>{
+  "payload": {
+    "summary": "Payment Gateway Failure - {{int(5,20)}}% of checkouts failing",
+    "severity": "critical",
+    "source": "payment-gateway",
+    "class": "CheckoutFailure",
+    "component": "checkout",
+    "group": "Ecommerce-Payments",
+    "custom_details": {
+      "failure_rate": "{{int(5,20)}}%",
+      "affected_methods": "credit card, PayPal",
+      "impact": "Customers unable to complete purchases"
+    }
+  }
+}</div>
+        <textarea id="payload1" name="payload1" placeholder='Paste your JSON here...'></textarea>
+      </div>
+      <div class="payload-section">
+        <label for="payload2">Payload 2</label>
+        <div class="sample">// Sample:<br>{
+  "payload": {
+    "summary": "Order Fulfillment Delay - Avg processing {{int(10,30)}}min",
+    "severity": "warning",
+    "source": "order-service",
+    "class": "FulfillmentDelay",
+    "component": "order-processing",
+    "group": "Ecommerce-Orders",
+    "custom_details": {
+      "avg_processing_time": "{{int(10,30)}}min",
+      "open_orders": "{{int(50,200)}}",
+      "impact": "Delayed order shipments"
+    }
+  }
+}</div>
+        <textarea id="payload2" name="payload2" placeholder='Paste your JSON here...'></textarea>
+      </div>
+      <div class="payload-section">
+        <label for="payload3">Payload 3</label>
+        <div class="sample">// Sample:<br>{
+  "payload": {
+    "summary": "Customer Support Latency - Avg response {{int(2,10)}}min",
+    "severity": "warning",
+    "source": "support-service",
+    "class": "SupportLatency",
+    "component": "customer-support",
+    "group": "Ecommerce-Support",
+    "custom_details": {
+      "avg_response_time": "{{int(2,10)}}min",
+      "open_tickets": "{{int(20,100)}}",
+      "impact": "Delayed support responses"
+    }
+  }
+}</div>
+        <textarea id="payload3" name="payload3" placeholder='Paste your JSON here...'></textarea>
+      </div>
+      <div class="payload-section">
+        <label for="payload4">Payload 4</label>
+        <div class="sample">// Sample:<br>{
+  "payload": {
+    "summary": "shop-db01 running low on disk space: {{int(2,5)}}% free - order processing at risk",
+    "event_action": "trigger",
+    "severity": "critical",
+    "source": "database-cluster",
+    "class": "Infrastructure",
+    "component": "shop-main-db",
+    "group": "Ecommerce-Infrastructure",
+    "custom_details": {
+      "affected_nodes": "{{int(2,5)}}",
+      "response_time": "{{int(500,2000)}}ms",
+      "impact": "Slow order and cart processing",
+      "replication_lag": "{{int(30,120)}}s"
+    }
+  }
+}</div>
+        <textarea id="payload4" name="payload4" placeholder='Paste your JSON here...'></textarea>
+      </div>
+      <button type="submit" class="btn">Save Payloads</button>
+      <div class="status" id="status"></div>
+    </form>
+  </div>
+  <script>
+    // Default payloads (same as samples)
+    const defaultPayloads = {
+      payload1: {
+        payload: {
+          summary: "Payment Gateway Failure - {{int(5,20)}}% of checkouts failing",
+          severity: "critical",
+          source: "payment-gateway",
+          class: "CheckoutFailure",
+          component: "checkout",
+          group: "Ecommerce-Payments",
+          custom_details: {
+            failure_rate: "{{int(5,20)}}%",
+            affected_methods: "credit card, PayPal",
+            impact: "Customers unable to complete purchases"
+          }
+        }
+      },
+      payload2: {
+        payload: {
+          summary: "Order Fulfillment Delay - Avg processing {{int(10,30)}}min",
+          severity: "warning",
+          source: "order-service",
+          class: "FulfillmentDelay",
+          component: "order-processing",
+          group: "Ecommerce-Orders",
+          custom_details: {
+            avg_processing_time: "{{int(10,30)}}min",
+            open_orders: "{{int(50,200)}}",
+            impact: "Delayed order shipments"
+          }
+        }
+      },
+      payload3: {
+        payload: {
+          summary: "Customer Support Latency - Avg response {{int(2,10)}}min",
+          severity: "warning",
+          source: "support-service",
+          class: "SupportLatency",
+          component: "customer-support",
+          group: "Ecommerce-Support",
+          custom_details: {
+            avg_response_time: "{{int(2,10)}}min",
+            open_tickets: "{{int(20,100)}}",
+            impact: "Delayed support responses"
+          }
+        }
+      },
+      payload4: {
+        payload: {
+          summary: "shop-db01 running low on disk space: {{int(2,5)}}% free - order processing at risk",
+          event_action: "trigger",
+          severity: "critical",
+          source: "database-cluster",
+          class: "Infrastructure",
+          component: "shop-main-db",
+          group: "Ecommerce-Infrastructure",
+          custom_details: {
+            affected_nodes: "{{int(2,5)}}",
+            response_time: "{{int(500,2000)}}ms",
+            impact: "Slow order and cart processing",
+            replication_lag: "{{int(30,120)}}s"
+          }
+        }
+      }
+    };
+
+    // Load payloads from localStorage or use defaults
+    function loadPayloads() {
+      let payloads = localStorage.getItem('pd_alert_payloads');
+      if (payloads) {
+        try {
+          payloads = JSON.parse(payloads);
+        } catch {
+          payloads = defaultPayloads;
+        }
+      } else {
+        payloads = defaultPayloads;
+      }
+      for (const key of ['payload1', 'payload2', 'payload3', 'payload4']) {
+        document.getElementById(key).value = JSON.stringify(payloads[key], null, 2);
+      }
+    }
+
+    // Save payloads to localStorage
+    document.getElementById('payloadForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const status = document.getElementById('status');
+      status.style.display = 'none';
+      let payloads = {};
+      try {
+        for (const key of ['payload1', 'payload2', 'payload3', 'payload4']) {
+          payloads[key] = JSON.parse(document.getElementById(key).value);
+        }
+        localStorage.setItem('pd_alert_payloads', JSON.stringify(payloads));
+        status.textContent = "Payloads saved successfully!";
+        status.className = "status";
+        status.style.display = 'block';
+      } catch (err) {
+        status.textContent = "Error: Invalid JSON in one or more fields.";
+        status.className = "status error";
+        status.style.display = 'block';
+      }
+    });
+
+    loadPayloads();
+  </script>
+</body>
+</html>
