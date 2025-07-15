@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PagerDuty Change Event Scheduler (Manual Send, Paired)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f5f7fa;
+      color: #2e3a43;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 48px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(84,110,122,0.08);
+      padding: 32px 24px;
+    }
+    h1 {
+      font-size: 1.7em;
+      margin-bottom: 18px;
+      color: #546e7a;
+      font-weight: 700;
+      text-align: center;
+    }
+    label {
+      font-weight: 600;
+      color: #37474f;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .sample {
+      font-size: 0.98em;
+      color: #90a4ae;
+      margin-bottom: 6px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      background: #f9fafb;
+      border-radius: 6px;
+      padding: 8px 10px;
+      white-space: pre-wrap;
+    }
+    textarea, input[type="text"], input[type="number"], input[type="password"] {
+      width: 100%;
+      min-height: 40px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #e3e8ee;
+      padding: 12px;
+      margin-bottom: 8px;
+      background: #f9fafb;
+      resize: vertical;
+      transition: border 0.2s;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 120px;
+    }
+    textarea:focus, input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus {
+      border: 1.5px solid #a7c7e7;
+      outline: none;
+    }
+    .btn, .btn-add, .btn-remove {
+      background: #546e7a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.18s;
+      margin-bottom: 0;
+    }
+    .btn:hover, .btn-add:hover, .btn-remove:hover {
+      background: #37474f;
+    }
+    .btn-add {
+      background: #4caf50;
+      font-size: 1em;
+      padding: 8px 18px;
+      margin-top: 0;
+      margin-bottom: 10px;
+      margin-right: 8px;
+    }
+    .btn-remove {
+      background: #e53935;
+      font-size: 0.95em;
+      padding: 6px 14px;
+      margin-left: 8px;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    .status {
+      margin-top: 18px;
+      font-size: 1.08em;
+      color: #43a047;
+      font-weight: 600;
+      display: none;
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
+    .status.error {
+      color: #e53935;
+    }
+    .status.success {
+      color: #43a047;
+    }
+    .field-group {
+      margin-bottom: 18px;
+      border-bottom: 1px solid #e3e8ee;
+      padding-bottom: 10px;
+    }
+    .field-group:last-child {
+      border-bottom: none;
+    }
+    .field-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .columns-3 {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .col {
+      flex: 1 1 300px;
+      min-width: 280px;
+      background: #f9fafb;
+      border-radius: 10px;
+      padding: 14px 12px 8px 12px;
+      box-sizing: border-box;
+      border: 1px solid #e3e8ee;
+      position: relative;
+    }
+    .col h3 {
+      font-size: 1.1em;
+      color: #546e7a;
+      margin: 0 0 8px 0;
+      font-weight: 700;
+    }
+    .col .btn-add, .col .btn-remove {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 0.95em;
+      padding: 6px 14px;
+    }
+    .col .btn-add {
+      background: #4caf50;
+      margin-right: 8px;
+    }
+    .col .btn-remove {
+      background: #e53935;
+    }
+    @media (max-width: 1200px) {
+      .container {
+        max-width: 98vw;
+      }
+      .columns-3 {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .col {
+        min-width: 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 12px 2vw;
+      }
+      h1 {
+        font-size: 1.2em;
+      }
+      .field-label-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PagerDuty Change Event Scheduler</h1>
+    <form id="changeForm" autocomplete="off">
+      <label>Routing Keys (at least one required)</label>
+      <div class="columns-3">
+        <div class="col" id="apiKeyCol1">
+          <h3>API Key 1</h3>
+          <button type="button" class="btn-add" id="addRoutingKeyBtn1">Add Routing Key</button>
+          <div id="routingKeysList1"></div>
+        </div>
+        <div class="col" id="apiKeyCol2">
+          <h3>API Key 2</h3>
+          <button type="button" class="btn-add" id="addRoutingKeyBtn2">Add Routing Key</button>
+          <div id="routingKeysList2"></div>
+        </div>
+        <div class="col" id="apiKeyCol3">
+          <h3>API Key 3</h3>
+          <button type="button" class="btn-add" id="addRoutingKeyBtn3">Add Routing Key</button>
+          <div id="routingKeysList3"></div>
+        </div>
+      </div>
+      <label>Raw JSON Payloads (at least one required)</label>
+      <div class="columns-3">
+        <div class="col" id="payloadCol1">
+          <h3>Raw JSON Payload 1</h3>
+          <button type="button" class="btn-add" id="addPayloadJsonBtn1">Add JSON Payload</button>
+          <div class="sample" id="sample1"></div>
+          <div id="payloadJsonList1"></div>
+        </div>
+        <div class="col" id="payloadCol2">
+          <h3>Raw JSON Payload 2</h3>
+          <button type="button" class="btn-add" id="addPayloadJsonBtn2">Add JSON Payload</button>
+          <div class="sample" id="sample2"></div>
+          <div id="payloadJsonList2"></div>
+        </div>
+        <div class="col" id="payloadCol3">
+          <h3>Raw JSON Payload 3</h3>
+          <button type="button" class="btn-add" id="addPayloadJsonBtn3">Add JSON Payload</button>
+          <div class="sample" id="sample3"></div>
+          <div id="payloadJsonList3"></div>
+        </div>
+      </div>
+      <button type="submit" class="btn">Send Change Event(s)</button>
+      <div class="status" id="changeStatus"></div>
+    </form>
+  </div>
+  <script>
+    // Sample payloads with dynamic timestamp
+    function getSamplePayload(type) {
+      const now = new Date().toISOString();
+      if (type === 1) {
+        return `{
+  "payload": {
+    "summary": "Application deployed to production",
+    "source": "ci-cd-pipeline",
+    "timestamp": "${now}",
+    "custom_details": {
+      "application": "web-frontend",
+      "version": "2.3.1",
+      "deployer": "jenkins"
+    }
+  }
+}`;
+      } else if (type === 2) {
+        return `{
+  "payload": {
+    "summary": "Database schema migration completed",
+    "source": "db-migration-tool",
+    "timestamp": "${now}",
+    "custom_details": {
+      "database": "users-db",
+      "migration_id": "20250715-001",
+      "executed_by": "liquibase"
+    }
+  }
+}`;
+      } else {
+        return `{
+  "payload": {
+    "summary": "Firewall rule updated",
+    "source": "network-automation",
+    "timestamp": "${now}",
+    "custom_details": {
+      "rule_id": "FW-2025-07-15-01",
+      "change_type": "allow",
+      "changed_by": "netops"
+    }
+  }
+}`;
+      }
+    }
+
+    // Set static sample text on page load (timestamp will be static, but new payloads will be dynamic)
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('sample1').textContent = getSamplePayload(1);
+      document.getElementById('sample2').textContent = getSamplePayload(2);
+      document.getElementById('sample3').textContent = getSamplePayload(3);
+    });
+
+    // Routing Keys
+    function createRoutingKeyField(value = '', idx = 0) {
+      const div = document.createElement('div');
+      div.className = 'field-group';
+      div.style.position = 'relative';
+      div.innerHTML = `
+        <input type="password" class="routingKeyInput" placeholder="Routing Key #${idx+1}" value="${value.replace(/"/g, '&quot;')}" required autocomplete="off">
+        <button type="button" class="btn-remove" title="Remove Routing Key" style="position:absolute;right:0;top:0;">&times;</button>
+      `;
+      div.querySelector('.btn-remove').onclick = function() {
+        div.remove();
+        updateRoutingKeyPlaceholders();
+      };
+      return div;
+    }
+    function updateRoutingKeyPlaceholders() {
+      document.querySelectorAll('.routingKeyInput').forEach((el, i) => {
+        el.placeholder = `Routing Key #${i+1}`;
+      });
+    }
+
+    // Payloads
+    function createPayloadJsonField(value = '', idx = 0, col = 1) {
+      const div = document.createElement('div');
+      div.className = 'field-group';
+      div.style.position = 'relative';
+      div.innerHTML = `
+        <textarea class="payloadJsonInput" placeholder="Payload #${idx+1} (JSON)">${value}</textarea>
+        <button type="button" class="btn-remove" title="Remove Payload" style="position:absolute;right:0;top:0;">&times;</button>
+      `;
+      div.querySelector('.btn-remove').onclick = function() {
+        div.remove();
+        updatePayloadJsonPlaceholders();
+      };
+      return div;
+    }
+    function updatePayloadJsonPlaceholders() {
+      document.querySelectorAll('.payloadJsonInput').forEach((el, i) => {
+        el.placeholder = `Payload #${i+1} (JSON)`;
+      });
+    }
+
+    // Add initial fields
+    function addInitialFields() {
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById('routingKeysList' + i).appendChild(createRoutingKeyField('', 0));
+        document.getElementById('payloadJsonList' + i).appendChild(createPayloadJsonField(getSamplePayload(i), 0, i));
+      }
+      updateRoutingKeyPlaceholders();
+      updatePayloadJsonPlaceholders();
+    }
+
+    // Add Routing Key buttons
+    for (let i = 1; i <= 3; i++) {
+      document.getElementById('addRoutingKeyBtn' + i).onclick = function() {
+        const list = document.getElementById('routingKeysList' + i);
+        list.appendChild(createRoutingKeyField('', list.children.length));
+        updateRoutingKeyPlaceholders();
+      };
+    }
+    // Add Payload buttons (with dynamic timestamp)
+    for (let i = 1; i <= 3; i++) {
+      document.getElementById('addPayloadJsonBtn' + i).onclick = function() {
+        const list = document.getElementById('payloadJsonList' + i);
+        list.appendChild(createPayloadJsonField(getSamplePayload(i), list.children.length, i));
+        updatePayloadJsonPlaceholders();
+      };
+    }
+
+    // Send logic: only matching column pairs
+    async function sendChangeEvent(routingKey, payload, status, showTime = true) {
+      const body = {
+        routing_key: routingKey,
+        ...payload
+      };
+      try {
+        const res = await fetch('https://events.pagerduty.com/v2/change/enqueue', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (res.ok) {
+          let msg = "Change event sent!";
+          if (showTime) {
+            msg += " (" + new Date().toLocaleString() + ")";
+          }
+          msg += "\n" + JSON.stringify(data, null, 2);
+          status.textContent += msg + "\n\n";
+          status.className = "status success";
+        } else {
+          status.textContent += "Error: " + (data.message || JSON.stringify(data)) + "\n\n";
+          status.className = "status error";
+        }
+        status.style.display = 'block';
+      } catch (err) {
+        status.textContent += "Network or CORS error: " + err.message + "\n\n";
+        status.className = "status error";
+        status.style.display = 'block';
+      }
+    }
+
+    document.getElementById('changeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const status = document.getElementById('changeStatus');
+      status.style.display = 'none';
+      status.textContent = '';
+      status.className = 'status';
+
+      // Gather routing keys and payloads from each column
+      let routingKeys = [[], [], []];
+      let payloads = [[], [], []];
+      let payloadError = false;
+
+      for (let i = 1; i <= 3; i++) {
+        routingKeys[i-1] = Array.from(document.querySelectorAll('#routingKeysList' + i + ' .routingKeyInput'))
+          .map(el => el.value.trim())
+          .filter(val => val);
+
+        document.querySelectorAll('#payloadJsonList' + i + ' .payloadJsonInput').forEach((el, j) => {
+          const val = el.value.trim();
+          if (!val) return;
+          try {
+            payloads[i-1].push(JSON.parse(val));
+          } catch (err) {
+            status.textContent = `Invalid JSON in Raw JSON Payload ${i} #${j+1}.`;
+            status.className += " error";
+            status.style.display = 'block';
+            payloadError = true;
+          }
+        });
+      }
+
+      // At least one routing key and one payload in any column
+      if (routingKeys.flat().length === 0) {
+        status.textContent = "At least one Routing Key is required.";
+        status.className += " error";
+        status.style.display = 'block';
+        return;
+      }
+      if (payloadError) return;
+      if (payloads.flat().length === 0) {
+        status.textContent = "At least one valid payload (in any column) is required.";
+        status.className += " error";
+        status.style.display = 'block';
+        return;
+      }
+
+      // Helper to send only matching column pairs
+      status.textContent = '';
+      for (let i = 0; i < 3; i++) {
+        for (const routingKey of routingKeys[i]) {
+          for (const payload of payloads[i]) {
+            sendChangeEvent(routingKey, payload, status, true);
+          }
+        }
+      }
+    });
+
+    // Add initial fields on load
+    addInitialFields();
+  </script>
+</body>
+</html>

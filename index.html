@@ -74,11 +74,26 @@
       margin-bottom: 40px;
       font-weight: 500;
     }
+    .nav-section {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 32px;
+    }
+    .nav-title {
+      color: #263238;
+      font-size: 1.15em;
+      font-weight: 700;
+      margin: 24px 0 12px 12px;
+      letter-spacing: 0.5px;
+    }
     .nav {
       display: flex;
+      flex-direction: row;
       gap: 32px;
       justify-content: center;
-      margin-bottom: 48px;
+      margin-bottom: 0;
+      width: 100%;
+      flex-wrap: nowrap;
     }
     .nav a {
       display: flex;
@@ -94,6 +109,8 @@
       font-weight: 600;
       transition: box-shadow 0.2s, transform 0.2s;
       min-width: 160px;
+      max-width: 240px;
+      flex: 1 1 220px;
       border: 2px solid #e0e0e0;
     }
     .nav a:hover {
@@ -114,14 +131,24 @@
       font-size: 0.95em;
       text-align: center;
     }
+    @media (max-width: 900px) {
+      .nav-section {
+        max-width: 600px;
+      }
+    }
     @media (max-width: 700px) {
+      .nav-section {
+        max-width: 95vw;
+      }
       .nav {
         flex-direction: column;
         gap: 20px;
+        max-width: 95vw;
       }
       .nav a {
         min-width: 0;
         width: 90vw;
+        max-width: none;
       }
     }
   </style>
@@ -140,32 +167,46 @@
     <button onclick="savePDKey()" class="pd-key-btn">Save</button>
     <span id="pd-key-status" class="pd-key-status"></span>
   </div>
-  <div class="nav">
-    <a href="Shopping.html">
-      <span class="material-icons nav-icon">shopping_cart</span>
-      Retail Demo
-    </a>
-    <a href="Bank.html">
-      <span class="material-icons nav-icon">account_balance</span>
-      Banking Demo
-    </a>
-    <a href="Holiday.html">
-      <span class="material-icons nav-icon">beach_access</span>
-      Holiday Demo
-    </a>
-    <a href="Telco.html">
-      <span class="material-icons nav-icon">cell_tower</span>
-      Telco Demo
-    </a>
-    <a href="TriggerEvents.html">
-      <span class="material-icons nav-icon">person</span>
-      AE Demo
-    </a>
-    <a href="PDOT.html">
-      <span class="material-icons nav-icon">hub</span>
-      PDOT
-    </a>
+
+  <div class="nav-section">
+    <div class="nav">
+      <a href="Shopping.html">
+        <span class="material-icons nav-icon">shopping_cart</span>
+        Retail Demo
+      </a>
+      <a href="Bank.html">
+        <span class="material-icons nav-icon">account_balance</span>
+        Banking Demo
+      </a>
+      <a href="Holiday.html">
+        <span class="material-icons nav-icon">beach_access</span>
+        Holiday Demo
+      </a>
+      <a href="Telco.html">
+        <span class="material-icons nav-icon">cell_tower</span>
+        Telco Demo
+      </a>
+    </div>
   </div>
+
+  <div class="nav-section">
+    <div class="nav-title">Internal PD Demos</div>
+    <div class="nav">
+      <a href="TriggerEvents.html">
+        <span class="material-icons nav-icon">person</span>
+        AE Demo
+      </a>
+      <a href="PDOT.html">
+        <span class="material-icons nav-icon">hub</span>
+        PDOT
+      </a>
+      <a href="Changes.html">
+        <span class="material-icons nav-icon">autorenew</span>
+        Change Events
+      </a>
+    </div>
+  </div>
+
   <div class="footer">
     &copy; 2025 PagerDuty Demo Portal &mdash; For Internal Use Only
   </div>
