@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <base href="">
@@ -7,231 +8,50 @@
   <!-- Import Google Material Icons and Materialize CSS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-  
   <!-- CodeMirror CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/theme/material-darker.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/lint/lint.min.css">
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
-
-    body {
-      font-family: 'IBM Plex Sans', sans-serif;
-      background-color: #1a1a1a;
-      color: #f0f0f0;
-    }
-
-    .sidenav {
-      width: 275px;
-      background-color: #252525;
-      padding-top: 20px;
-    }
-
-    .sidenav .user-view {
-      background-color: #1a1a1a;
-      padding-bottom: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-
-    .sidenav .user-view a.brand-logo {
-      display: block;
-      color: #f0f0f0;
-      text-align: center;
-    }
-
-    .sidenav .user-view a.brand-logo i.logo-icon {
-      font-size: 80px;
-    }
-
-    .sidenav .user-view a.brand-logo span.logo-text {
-      font-size: 20px;
-      display: block;
-    }
-
-    .sidenav .user-view .help-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      font-size: 24px;
-    }
-
-    .categories {
-      list-style-type: none;
-      margin-bottom: 60px;
-    }
-
-    .categories li a {
-      color: #f0f0f0;
-      display: block;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 20px;
-    }
-
-    .categories li a:hover, .categories li a.active {
-      background-color: #3a3a3a;
-    }
-
-    .routing-key-container {
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      margin-bottom: 20px;
-    }
-
-    .routing-key-container input {
-      flex: 1;
-      padding: 10px;
-      background-color: #3a3a3a;
-      border: none;
-      color: #f0f0f0;
-    }
-
-    .routing-key-container a {
-      margin-left: 10px;
-      color: #f0f0f0;
-      cursor: pointer;
-    }
-
-    .trigger-button-container {
-      text-align: center;
-      padding: 0 20px 20px 20px;
-    }
-
-    main {
-      margin-left: 250px;
-      padding: 20px;
-    }
-
-    .card-content .card-title {
-      font-weight: 500;
-      color: #fff;
-    }
-
-    .card {
-      background-color: #2a2a2a;
-    }
-
-    .card .card-content p {
-      color: #b0b0b0;
-    }
-
-    .card .card-action label input[type="checkbox"] + span {
-      color: #f0f0f0;
-    }
-
-    .modal {
-      background-color: #2a2a2a;
-    }
-
-    .modal .modal-content {
-      color: #f0f0f0;
-    }
-
-    .CodeMirror {
-      background-color: #1a1a1a;
-      color: #f0f0f0;
-      height: auto;
-    }
-
-    .toast {
-      background-color: #ff5722;
-    }
-
-    .help-icon {
-      cursor: pointer;
-      font-size: 20px;
-      margin-left: 10px;
-    }
-
-    .help-popup {
-      display: none;
-      position: fixed;
-      top: 70px;
-      left: 260px;
-      background-color: #3a3a3a;
-      border-radius: 8px;
-      padding: 15px;
-      width: 300px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      z-index: 1000;
-    }
-
-    .help-popup p {
-      color: #f0f0f0;
-    }
-
-    .help-popup.show {
-      display: block;
-    }
-    .pagerduty-logo {
-      height: 80px;
-      vertical-align: middle;
-      margin-right: 10px;
-    }
-
-    #pdfContainer {
-      position: fixed;
-      top: 0;
-      left: 275px;
-      width: calc(100% - 250px);
-      height: 100%;
-      background: rgba(0,0,0,0.8);
-      z-index: 999;
-      display: none;
-      transition: all 0.3s ease;
-    }
-
-    #pdfIframe {
-      width: 90%;
-      height: 90%;
-      margin: 2% auto;
-      display: block;
-      border: none;
-      background: white;
-    }
-
-    /* Responsive Styles */
+    body { font-family: 'IBM Plex Sans', sans-serif; background-color: #1a1a1a; color: #f0f0f0; }
+    .sidenav { width: 275px; background-color: #252525; padding-top: 20px; }
+    .sidenav .user-view { background-color: #1a1a1a; padding-bottom: 20px; display: flex; flex-direction: column; align-items: center; position: relative; }
+    .sidenav .user-view a.brand-logo { display: block; color: #f0f0f0; text-align: center; }
+    .sidenav .user-view a.brand-logo i.logo-icon { font-size: 80px; }
+    .sidenav .user-view a.brand-logo span.logo-text { font-size: 20px; display: block; }
+    .sidenav .user-view .help-icon { position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 24px; }
+    .categories { list-style-type: none; margin-bottom: 60px; }
+    .categories li a { color: #f0f0f0; display: block; padding: 10px; cursor: pointer; font-size: 20px; }
+    .categories li a:hover, .categories li a.active { background-color: #3a3a3a; }
+    .routing-key-container { display: flex; align-items: center; padding: 0 20px; margin-bottom: 20px; }
+    .routing-key-container input { flex: 1; padding: 10px; background-color: #3a3a3a; border: none; color: #f0f0f0; }
+    .routing-key-container a { margin-left: 10px; color: #f0f0f0; cursor: pointer; }
+    .trigger-button-container { text-align: center; padding: 0 20px 20px 20px; }
+    main { margin-left: 250px; padding: 20px; }
+    .card-content .card-title { font-weight: 500; color: #fff; }
+    .card { background-color: #2a2a2a; }
+    .card .card-content p { color: #b0b0b0; }
+    .card .card-action label input[type="checkbox"] + span { color: #f0f0f0; }
+    .modal { background-color: #2a2a2a; }
+    .modal .modal-content { color: #f0f0f0; }
+    .CodeMirror { background-color: #1a1a1a; color: #f0f0f0; height: auto; }
+    .toast { background-color: #ff5722; }
+    .help-icon { cursor: pointer; font-size: 20px; margin-left: 10px; }
+    .help-popup { display: none; position: fixed; top: 70px; left: 260px; background-color: #3a3a3a; border-radius: 8px; padding: 15px; width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 1000; }
+    .help-popup p { color: #f0f0f0; }
+    .help-popup.show { display: block; }
+    .pagerduty-logo { height: 80px; vertical-align: middle; margin-right: 10px; }
+    #pdfContainer { position: fixed; top: 0; left: 275px; width: calc(100% - 250px); height: 100%; background: rgba(0,0,0,0.8); z-index: 999; display: none; transition: all 0.3s ease; }
+    #pdfIframe { width: 90%; height: 90%; margin: 2% auto; display: block; border: none; background: white; }
     @media screen and (max-width: 768px) {
-      .sidenav {
-        position: fixed;
-        width: 100%;
-        height: auto;
-        top: 0;
-        left: -100%;
-        transition: left 0.3s ease-in-out;
-        z-index: 1000;
-      }
-    
-      .sidenav.show {
-        left: 0;
-      }
-    
-      main {
-        margin-left: 0;
-        padding-top: 60px;
-      }
-
-      .row {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .card {
-        width: 90%;
-        margin-bottom: 20px;
-      }
+      .sidenav { position: fixed; width: 100%; height: auto; top: 0; left: -100%; transition: left 0.3s ease-in-out; z-index: 1000; }
+      .sidenav.show { left: 0; }
+      main { margin-left: 0; padding-top: 60px; }
+      .row { flex-direction: column; align-items: center; }
+      .card { width: 90%; margin-bottom: 20px; }
     }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
+    img { max-width: 100%; height: auto; }
   </style>
 </head>
 <body>
@@ -246,18 +66,15 @@
         <i class="material-icons help-icon" id="helpIcon">info_outline</i>
       </div>
     </li>
-    <!-- Categories -->
     <li>
       <ul class="categories" id="categories"></ul>
     </li>
-    <!-- Configuration -->
     <li>
       <div class="config">
         <div class="routing-key-container">
           <input type="password" id="routingKey" placeholder="Enter your routing key">
           <a href="#!" id="toggleRoutingKey"><i class="material-icons">visibility</i></a>
         </div>
-        <!-- New input for specifying number of triggers -->
         <div class="routing-key-container" style="margin-top: 10px;">
           <input type="number" id="triggerCount" placeholder="Enter trigger count" min="1" value="1" style="flex: 1; padding: 10px; background-color: #3a3a3a; border: none; color: #f0f0f0;">
         </div>
@@ -273,24 +90,18 @@
       </div>
     </li>
   </ul>
-
-  <!-- Help Popup -->
   <div class="help-popup card" id="helpPopup">
     <div class="card-content">
       <span class="card-title">Help</span>
       <p>This tool allows you to generate and trigger PagerDuty events.</p>
       <p>Don't forget to set your Routing Key in the configuration section!</p>
       <p>You can also specify how many times each event should be triggered, with a 10-second delay between each trigger.</p>
+      <p>If you add <code>&autoTrigger=true</code> and <code>&triggerCount=3</code> to the URL, all events will be triggered 3 times automatically on load.</p>
     </div>
   </div>
-
   <main>
-    <div class="row" id="cardContainer">
-      <!-- Cards will be injected here -->
-    </div>
+    <div class="row" id="cardContainer"></div>
   </main>
-
-  <!-- Edit Modal Structure -->
   <div id="editModal" class="modal">
     <div class="modal-content">
       <h4>Edit JSON Payload</h4>
@@ -305,12 +116,8 @@
   <div id="pdfContainer">
     <iframe id="pdfIframe" src="" type="application/pdf"></iframe>
   </div>
-  
-  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
-  <!-- CodeMirror JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/mode/javascript/javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/edit/closebrackets.min.js"></script>
@@ -318,9 +125,45 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/lint/lint.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/addon/display/autorefresh.min.js"></script>
-  
   <script>
-    // Helper function that replaces template {{int(min,max)}} with a random integer.
+    function getQueryParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    function setRoutingKeyCookie(value) {
+      document.cookie = `routingKey=${encodeURIComponent(value)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; SameSite=Strict`;
+    }
+    function getRoutingKeyCookie() {
+      const name = "routingKey=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const cookieArray = decodedCookie.split(';');
+      for(let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+          return cookie.substring(name.length, cookie.length);
+        }
+      }
+      return "";
+    }
+    window.onload = () => {
+      const urlRoutingKey = getQueryParam('routingKey');
+      if (urlRoutingKey) {
+        routingKeyInput.value = urlRoutingKey;
+        routingKeyInput.type = "password";
+        setRoutingKeyCookie(urlRoutingKey);
+      } else {
+        const savedRoutingKey = getRoutingKeyCookie();
+        if (savedRoutingKey) {
+          routingKeyInput.value = savedRoutingKey;
+          routingKeyInput.type = "password";
+        }
+      }
+      // Set triggerCount from URL if present
+      const urlTriggerCount = getQueryParam('triggerCount');
+      if (urlTriggerCount && !isNaN(parseInt(urlTriggerCount, 10))) {
+        triggerCountInput.value = parseInt(urlTriggerCount, 10);
+      }
+    };
     function replaceRandomTemplates(str) {
       return str.replace(/{{int\((\d+),\s*(\d+)\)}}/g, function(match, min, max) {
         min = parseInt(min, 10);
@@ -328,147 +171,37 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
       });
     }
-    
     const categories = [
       { name: "Events", icon: "🔥" }
     ];
-    
     const payloads = {
       "Events": [
-        { 
-          title: "Payments API", 
-          description: "Payments API", 
-          category: "Events",
-          payload: { 
-            "payload": {
-              "summary": "Response Times exceeding threshold",
-              "timestamp": "2025-03-26T14:30:00Z",
-              "severity": "critical",
-              "source": "payment-api",
-              "class": "ServiceOutage",
-              "component": "pgw-api",
-              "group": "Prod-pd-apj",
-              "custom_details": {
-                "message": "The web application is experiencing downtime.",
-                "affected_service": "web-app",
-                "error_rate": "97%",
-                "latency": "15s",
-                "database_unreachable": true,
-                "recent_changes_detected": true,
-                "change_reference_id": "unknown",
-                "observed_behavior": "Service returning 500 errors",
-                "suggested_action": "Investigate recent logs, check health of dependent services"
-              }
-            },
-            "routing_key": "DYNAMIC",
-            "event_action": "trigger",
-            "client": "Prometheus",
-            "client_url": "https://monitoring.company.com/alerts/12345"
-          }
-        },
-        { 
-          title: "Login API", 
-          description: "Login API", 
-          category: "Events",
-          payload: { 
-            "payload": {
-              "summary": "API has not been used before or it is disabled",
-              "timestamp": "2025-03-26T14:30:00Z",
-              "severity": "critical",
-              "source": "login-api",
-              "class": "ServiceOutage",
-              "component": "identity-api",
-              "group": "Prod-pd-apj"
-            },
-            "routing_key": "DYNAMIC",
-            "event_action": "trigger",
-            "client": "Prometheus",
-            "client_url": "https://monitoring.company.com/alerts/12345"
-          }
-        },
-        { 
-          title: "Registration", 
-          description: "Registration", 
-          category: "Events",
-          payload: {
-            "payload": {
-              "summary": "Registration Response Times exceeding threshold",
-              "severity": "critical",
-              "source": "cart-api",
-              "class": "Carts",
-              "component": "sc-api",
-              "group": "Prod-pd-apj"
-            },
-            "routing_key": "DYNAMIC",
-            "event_action": "trigger",
-            "client": "Network Monitoring Service",
-            "client_url": "https://network-monitoring.company.com/alerts/throughput-001"
-          }
-        },
-        { 
-          title: "Heap Size", 
-          description: "Heap Size", 
-          category: "Events",
-          payload: {
-            "payload": {
-              "summary": "Heap Size {{int(80,100)}}% on apj.store.com",
-              "severity": "critical",
-              "source": "cart-api",
-              "class": "Heap Size",
-              "component": "sc-api",
-              "group": "Prod-pd-apj"
-            },
-            "routing_key": "DYNAMIC",
-            "event_action": "trigger",
-            "client": "Network Monitoring Service",
-            "client_url": "https://network-monitoring.company.com/alerts/throughput-001"
-          }
-        },
-        { 
-          title: "Host Error", 
-          description: "Host Error", 
-          category: "Events",
-          payload: {
-            "payload": {
-              "summary": "Cannot connect to host api-apj-prod-00{{int(1,9)}}",
-              "severity": "critical",
-              "source": "api-platform",
-              "class": "connection error",
-              "component": "sc-api",
-              "group": "Prod-pd-apj"
-            },
-            "routing_key": "DYNAMIC",
-            "event_action": "trigger",
-            "client": "Network Monitoring Service",
-            "client_url": "https://network-monitoring.company.com/alerts/throughput-001"
-          }
-        }
+        { title: "Payments API", description: "Payments API", category: "Events", payload: { "payload": { "summary": "Response Times exceeding threshold", "timestamp": "2025-03-26T14:30:00Z", "severity": "critical", "source": "payment-api", "class": "ServiceOutage", "component": "pgw-api", "group": "Prod-pd-apj", "custom_details": { "message": "The web application is experiencing downtime.", "affected_service": "web-app", "error_rate": "97%", "latency": "15s", "database_unreachable": true, "recent_changes_detected": true, "change_reference_id": "unknown", "observed_behavior": "Service returning 500 errors", "suggested_action": "Investigate recent logs, check health of dependent services" } }, "routing_key": "DYNAMIC", "event_action": "trigger", "client": "Prometheus", "client_url": "https://monitoring.company.com/alerts/12345" } },
+        { title: "Login API", description: "Login API", category: "Events", payload: { "payload": { "summary": "API has not been used before or it is disabled", "timestamp": "2025-03-26T14:30:00Z", "severity": "critical", "source": "login-api", "class": "ServiceOutage", "component": "identity-api", "group": "Prod-pd-apj" }, "routing_key": "DYNAMIC", "event_action": "trigger", "client": "Prometheus", "client_url": "https://monitoring.company.com/alerts/12345" } },
+        { title: "Registration", description: "Registration", category: "Events", payload: { "payload": { "summary": "Registration Response Times exceeding threshold", "severity": "critical", "source": "cart-api", "class": "Carts", "component": "sc-api", "group": "Prod-pd-apj" }, "routing_key": "DYNAMIC", "event_action": "trigger", "client": "Network Monitoring Service", "client_url": "https://network-monitoring.company.com/alerts/throughput-001" } },
+        { title: "Heap Size", description: "Heap Size", category: "Events", payload: { "payload": { "summary": "Heap Size {{int(80,100)}}% on apj.store.com", "severity": "critical", "source": "cart-api", "class": "Heap Size", "component": "sc-api", "group": "Prod-pd-apj" }, "routing_key": "DYNAMIC", "event_action": "trigger", "client": "Network Monitoring Service", "client_url": "https://network-monitoring.company.com/alerts/throughput-001" } },
+        { title: "Host Error", description: "Host Error", category: "Events", payload: { "payload": { "summary": "Cannot connect to host api-apj-prod-00{{int(1,9)}}", "severity": "critical", "source": "api-platform", "class": "connection error", "component": "sc-api", "group": "Prod-pd-apj" }, "routing_key": "DYNAMIC", "event_action": "trigger", "client": "Network Monitoring Service", "client_url": "https://network-monitoring.company.com/alerts/throughput-001" } }
       ]
     };
-    
     const categoriesList = document.getElementById('categories');
     const cardContainer = document.getElementById('cardContainer');
     const routingKeyInput = document.getElementById('routingKey');
     const toggleRoutingKeyBtn = document.getElementById('toggleRoutingKey');
     const triggerBtn = document.getElementById('triggerBtn');
-    const triggerCountInput = document.getElementById('triggerCount'); // Global trigger count (if used)
+    const triggerCountInput = document.getElementById('triggerCount');
     const modal = document.getElementById('editModal');
     const saveJsonBtn = document.getElementById('saveJson');
     const helpIcon = document.getElementById('helpIcon');
     const helpPopup = document.getElementById('helpPopup');
     const resetJsonBtn = document.getElementById('resetJson');
     const cancelJsonBtn = document.getElementById('cancelJson');
-    
     let editor = null;
     let currentCategory = "Events";
     let currentEditingCard = null;
-    
-    // Initialize Materialize components and CodeMirror
     document.addEventListener('DOMContentLoaded', function() {
       M.AutoInit();
       populateCategories();
       renderCards();
-      
       editor = CodeMirror.fromTextArea(document.getElementById('jsonEditor'), {
         mode: { name: "javascript", json: true },
         theme: "material-darker",
@@ -480,8 +213,18 @@
         autoRefresh: true
       });
       editor.setSize("100%", 400);
+      autoTriggerIfRequested();
     });
-    
+    function autoTriggerIfRequested() {
+      const urlRoutingKey = getQueryParam('routingKey');
+      const autoTrigger = getQueryParam('autoTrigger');
+      if (urlRoutingKey && autoTrigger === 'true') {
+        setTimeout(() => {
+          document.querySelectorAll('.card input[type="checkbox"]').forEach(cb => cb.checked = true);
+          document.getElementById('triggerBtn').click();
+        }, 500);
+      }
+    }
     function populateCategories() {
       categoriesList.innerHTML = '';
       categories.forEach((category) => {
@@ -495,17 +238,14 @@
         categoriesList.appendChild(li);
       });
     }
-    
     function switchCategory(categoryName) {
       currentCategory = categoryName;
       populateCategories();
       renderCards();
     }
-    
     function renderCards() {
       cardContainer.innerHTML = '';
       let itemsToRender = (payloads[currentCategory] || []).map((item, idx) => ({ ...item, category: currentCategory, index: idx }));
-    
       itemsToRender.forEach((item) => {
         const cardCol = document.createElement('div');
         cardCol.className = 'col s12 m6 l4';
@@ -518,41 +258,31 @@
         };
         cardDiv.dataset.category = item.category;
         cardDiv.dataset.index = item.index;
-    
         const cardContent = document.createElement('div');
         cardContent.className = 'card-content';
-    
         const cardIcon = document.createElement('span');
         cardIcon.className = 'card-title';
-    
         const iconSpan = document.createElement('span');
         iconSpan.textContent = categories.find(c => c.name === item.category).icon + ' ';
-    
         const titleSpan = document.createElement('span');
         titleSpan.textContent = item.title;
-    
         cardIcon.appendChild(iconSpan);
         cardIcon.appendChild(titleSpan);
-    
         const cardDesc = document.createElement('p');
         cardDesc.textContent = item.description;
-    
         cardContent.appendChild(cardIcon);
         cardContent.appendChild(cardDesc);
-    
         const cardAction = document.createElement('div');
         cardAction.className = 'card-action';
         const label = document.createElement('label');
         label.innerHTML = '<input type="checkbox" class="filled-in" checked="checked" /><span>Execute</span>';
         cardAction.appendChild(label);
-    
         cardDiv.appendChild(cardContent);
         cardDiv.appendChild(cardAction);
         cardCol.appendChild(cardDiv);
         cardContainer.appendChild(cardCol);
       });
     }
-    
     function openModal(item) {
       currentEditingCard = item;
       editor.setValue(JSON.stringify(item.payload, null, 2));
@@ -560,7 +290,6 @@
       instance.open();
       editor.refresh();
     }
-    
     saveJsonBtn.onclick = () => {
       try {
         const updatedPayload = JSON.parse(editor.getValue());
@@ -572,62 +301,54 @@
         M.toast({html: 'Invalid JSON. Please check your input.', classes: 'red'});
       }
     };
-    
     resetJsonBtn.onclick = () => {
       editor.setValue(JSON.stringify(currentEditingCard.payload, null, 2));
       M.toast({html: 'JSON payload reset to original.', classes: 'blue'});
     };
-    
     cancelJsonBtn.onclick = () => {
       const instance = M.Modal.getInstance(modal);
       instance.close();
     };
-    
     triggerBtn.onclick = () => {
       const routingKey = routingKeyInput.value.trim();
       if (!routingKey) {
         M.toast({html: 'Please enter a routing key', classes: 'red'});
         return;
       }
-    
-      const triggerCount = parseInt(triggerCountInput.value, 10);
+      // Support triggerCount from URL
+      let triggerCount = parseInt(triggerCountInput.value, 10);
+      const urlTriggerCount = getQueryParam('triggerCount');
+      if (urlTriggerCount && !isNaN(parseInt(urlTriggerCount, 10))) {
+        triggerCount = parseInt(urlTriggerCount, 10);
+        triggerCountInput.value = triggerCount;
+      }
       if (isNaN(triggerCount) || triggerCount < 1) {
         M.toast({html: 'Please enter a valid trigger count (at least 1)', classes: 'red'});
         return;
       }
-    
       const selectedCards = Array.from(document.querySelectorAll('.card')).filter(card => {
         const checkbox = card.querySelector('input[type="checkbox"]');
         return checkbox && checkbox.checked;
       });
-    
       if (selectedCards.length === 0) {
         M.toast({html: 'Please select at least one event to trigger.', classes: 'red'});
         return;
       }
-    
-      // For each selected event, schedule each fetch call with a 10-second delay between iterations.
       selectedCards.forEach(card => {
         const category = card.dataset.category;
         const index = card.dataset.index;
         const item = payloads[category][index];
-        // Clone the payload from the item.
         const originalPayload = JSON.parse(JSON.stringify(item.payload));
-        // Set the provided routing key.
         originalPayload.routing_key = routingKey;
-    
         for (let i = 0; i < triggerCount; i++) {
           setTimeout(() => {
-            // Create a fresh clone for each request so that random replacement is performed each time.
             let payloadClone = JSON.parse(JSON.stringify(originalPayload));
             if (payloadClone.payload && typeof payloadClone.payload.summary === 'string') {
               payloadClone.payload.summary = replaceRandomTemplates(payloadClone.payload.summary);
             }
             fetch('https://events.pagerduty.com/v2/enqueue', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
+              headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payloadClone)
             })
             .then(response => {
@@ -646,30 +367,11 @@
               console.error('Error:', error.message);
               M.toast({html: `Failed to trigger event: ${error.message}`, classes: 'red'});
             });
-          }, i * 10000); // Delay of 10 seconds between iterations
+          }, i * 10000);
         }
       });
-    
       M.toast({html: `Triggering events ${triggerCount} time(s) for ${selectedCards.length} selected event(s)`, classes: 'blue'});
     };
-    
-    function setRoutingKeyCookie(value) {
-      document.cookie = `routingKey=${encodeURIComponent(value)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; SameSite=Strict`;
-    }
-    
-    function getRoutingKeyCookie() {
-      const name = "routingKey=";
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const cookieArray = decodedCookie.split(';');
-      for(let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i].trim();
-        if (cookie.indexOf(name) === 0) {
-          return cookie.substring(name.length, cookie.length);
-        }
-      }
-      return "";
-    }
-    
     toggleRoutingKeyBtn.onclick = () => {
       if (routingKeyInput.type === "password") {
         routingKeyInput.type = "text";
@@ -679,23 +381,12 @@
         toggleRoutingKeyBtn.innerHTML = '<i class="material-icons">visibility</i>';
       }
     };
-    
     routingKeyInput.onchange = () => {
       setRoutingKeyCookie(routingKeyInput.value);
     };
-    
-    window.onload = () => {
-      const savedRoutingKey = getRoutingKeyCookie();
-      if (savedRoutingKey) {
-        routingKeyInput.value = savedRoutingKey;
-        routingKeyInput.type = "password";
-      }
-    };
-    
     helpIcon.onclick = () => {
       helpPopup.classList.toggle('show');
     };
-    
     window.onclick = (event) => {
       if (!event.target.matches('.help-icon') && !event.target.closest('.help-popup')) {
         helpPopup.classList.remove('show');
