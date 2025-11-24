@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PagerDuty Event Scheduler (Single Send)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f5f7fa;
+      color: #2e3a43;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 520px;
+      margin: 48px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px rgba(84,110,122,0.08);
+      padding: 32px 24px;
+    }
+    h1 {
+      font-size: 1.5em;
+      margin-bottom: 18px;
+      color: #546e7a;
+      font-weight: 700;
+      text-align: center;
+    }
+    label {
+      font-weight: 600;
+      color: #37474f;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .sample {
+      font-size: 0.98em;
+      color: #90a4ae;
+      margin-bottom: 6px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      background: #f9fafb;
+      border-radius: 6px;
+      padding: 8px 10px;
+      white-space: pre-wrap;
+    }
+    textarea, input[type="text"], input[type="password"] {
+      width: 100%;
+      min-height: 40px;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #e3e8ee;
+      padding: 12px;
+      margin-bottom: 8px;
+      background: #f9fafb;
+      resize: vertical;
+      transition: border 0.2s;
+      box-sizing: border-box;
+    }
+    textarea {
+      min-height: 120px;
+    }
+    textarea:focus, input[type="text"]:focus, input[type="password"]:focus {
+      border: 1.5px solid #a7c7e7;
+      outline: none;
+    }
+    .btn {
+      background: #546e7a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background 0.18s;
+      margin-bottom: 0;
+      width: 100%;
+    }
+    .btn:hover {
+      background: #37474f;
+    }
+    .status {
+      margin-top: 18px;
+      font-size: 1.08em;
+      color: #43a047;
+      font-weight: 600;
+      display: none;
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
+    .status.error {
+      color: #e53935;
+    }
+    .status.success {
+      color: #43a047;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 12px 2vw;
+      }
+      h1 {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PagerDuty Event Scheduler</h1>
+    <form id="changeForm" autocomplete="off">
+      <label for="routingKey">Routing Key (required)</label>
+      <input type="password" id="routingKey" placeholder="Routing Key" required autocomplete="off">
+
+      <label for="payloadJson">Payload (required)</label>
+      <div class="sample" id="sample"></div>
+      <textarea id="payloadJson" placeholder="Paste your full incident trigger JSON here" required></textarea>
+
+      <button type="submit" class="btn">Send Event</button>
+      <div class="status" id="changeStatus"></div>
+    </form>
+  </div>
+  <script>
+    // Sample payload object (not wrapped)
+    function getSamplePayload() {
+      const now = new Date().toISOString();
+      return `{
+  "event_action": "trigger",
+  "payload": {
+    "summary": "Application deployed to production",
+    "source": "ci-cd-pipeline",
+    "timestamp": "${now}",
+    "severity": "info",
+    "custom_details": {
+      "application": "web-frontend",
+      "version": "2.3.1",
+      "deployer": "jenkins"
+    }
+  }
+}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('sample').textContent = getSamplePayload();
+      document.getElementById('payloadJson').value = getSamplePayload();
+    });
+
+    async function sendIncidentEvent(routingKey, payloadObj, status) {
+      // Always set routing_key to the textbox value, overwriting any in the payload
+      payloadObj.routing_key = routingKey;
+      try {
+        const res = await fetch('https://events.pagerduty.com/v2/enqueue', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payloadObj)
+        });
+        const data = await res.json();
+        if (res.ok) {
+          let msg = "Incident event sent! (" + new Date().toLocaleString() + ")";
+          msg += "\n" + JSON.stringify(data, null, 2);
+          status.textContent = msg;
+          status.className = "status success";
+        } else {
+          status.textContent = "Error: " + (data.message || JSON.stringify(data));
+          status.className = "status error";
+        }
+        status.style.display = 'block';
+      } catch (err) {
+        status.textContent = "Network or CORS error: " + err.message;
+        status.className = "status error";
+        status.style.display = 'block';
+      }
+    }
+
+    document.getElementById('changeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const status = document.getElementById('changeStatus');
+      status.style.display = 'none';
+      status.textContent = '';
+      status.className = 'status';
+
+      const routingKey = document.getElementById('routingKey').value.trim();
+      const payloadText = document.getElementById('payloadJson').value.trim();
+
+      if (!routingKey) {
+        status.textContent = "Routing Key is required.";
+        status.className += " error";
+        status.style.display = 'block';
+        return;
+      }
+      if (!payloadText) {
+        status.textContent = "Payload is required.";
+        status.className += " error";
+        status.style.display = 'block';
+        return;
+      }
+
+      let payloadObj;
+      try {
+        payloadObj = JSON.parse(payloadText);
+      } catch (err) {
+        status.textContent = "Invalid JSON in payload.";
+        status.className += " error";
+        status.style.display = 'block';
+        return;
+      }
+
+      sendIncidentEvent(routingKey, payloadObj, status);
+    });
+  </script>
+</body>
+</html>
