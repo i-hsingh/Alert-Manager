@@ -24,27 +24,10 @@
       --warning: #f57c00;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-      font-family: 'Inter', Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    body {
-      min-height: 100vh;
-    }
-
-    .app-container {
-      display: flex;
-      min-height: 100vh;
-    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100%; font-family: 'Inter', Arial, sans-serif; background: var(--bg); color: var(--text); }
+    body { min-height: 100vh; }
+    .app-container { display: flex; min-height: 100vh; }
 
     .sidebar {
       width: 270px;
@@ -58,1020 +41,158 @@
       z-index: 2;
     }
 
-    .logo {
-      padding: 0 24px;
-      margin-bottom: 20px;
-    }
+    .logo { padding: 0 24px; margin-bottom: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 1.35rem; font-weight: 700; letter-spacing: 0.2px; }
+    .brand i { font-size: 1.7rem; }
+    .welcome-copy { margin-top: 10px; font-size: 0.92rem; line-height: 1.45; color: rgba(255,255,255,0.9); }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
-
-    .brand i {
-      font-size: 1.7rem;
-    }
-
-    .welcome-copy {
-      margin-top: 10px;
-      font-size: 0.92rem;
-      line-height: 1.45;
-      color: rgba(255,255,255,0.9);
-    }
-
-    .sidebar nav {
-      margin-top: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
+    .sidebar nav { margin-top: 18px; display: flex; flex-direction: column; gap: 4px; }
     .sidebar nav a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 24px;
-      font-weight: 600;
-      border-left: 4px solid transparent;
-      border-radius: 0 18px 18px 0;
-      transition: background 0.18s ease, border-color 0.18s ease;
-    }
-
-    .sidebar nav a.active,
-    .sidebar nav a:hover {
-      background: rgba(255,255,255,0.12);
-      border-left-color: #dcedc8;
-    }
-
-    .sidebar nav i {
-      font-size: 1.35rem;
-    }
-
-    .demo-panel {
-      margin: 18px 16px 0 16px;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-
-    .demo-panel summary {
-      list-style: none;
-      cursor: pointer;
-      padding: 14px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-weight: 700;
-      font-size: 0.95rem;
-    }
-
-    .demo-panel summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .demo-panel-content {
-      padding: 0 14px 14px 14px;
-    }
-
-    .demo-panel label {
-      display: block;
-      font-size: 0.82rem;
-      margin-bottom: 6px;
-      color: rgba(255,255,255,0.92);
-    }
-
-    .demo-panel input {
-      width: 100%;
-      border: none;
-      outline: none;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 0.9rem;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
-
-    .demo-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .demo-panel button {
-      flex: 1 1 120px;
-      border: none;
-      outline: none;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-weight: 700;
-      cursor: pointer;
-      background: #fff;
-      color: var(--primary-dark);
-      transition: transform 0.15s ease, background 0.15s ease;
-    }
-
-    .demo-panel button:hover {
-      transform: translateY(-1px);
-      background: #dcedc8;
-    }
-
-    .demo-hint {
-      margin-top: 8px;
-      font-size: 0.75rem;
-      line-height: 1.4;
-      color: rgba(255,255,255,0.82);
-    }
-
-    .user-section {
-      margin-top: auto;
-      padding: 22px 24px 0 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .user-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(255,255,255,0.85);
-      background: #fff;
-    }
-
-    .user-name {
-      font-weight: 700;
-      font-size: 0.98rem;
-    }
-
-    .user-subtitle {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.86);
-      margin-top: 2px;
-    }
-
-    .main-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .main-header {
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 26px 34px 20px 34px;
-    }
-
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .page-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .page-title i {
-      color: var(--accent);
-    }
-
-    .hero-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--accent-soft);
-      color: var(--primary-dark);
-      border: 1px solid #cfe8d1;
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .hero-chip i {
-      font-size: 1.05rem;
-    }
-
-    .header-subtitle {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.45;
-      max-width: 760px;
-    }
-
-    .dashboard {
-      padding: 24px 34px 30px 34px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      flex: 1;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 24px;
-    }
-
-    .hero-card,
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      padding: 26px 26px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at top right, rgba(102, 187, 106, 0.14), transparent 32%),
-        linear-gradient(180deg, #ffffff 0%, #fbfffb 100%);
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      right: -40px;
-      top: -40px;
-      width: 180px;
-      height: 180px;
-      background: rgba(102, 187, 106, 0.08);
-      border-radius: 50%;
-    }
-
-    .hero-kicker {
-      color: var(--primary-dark);
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .hero-headline {
-      font-size: 2rem;
-      line-height: 1.15;
-      font-weight: 700;
-      max-width: 560px;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-text {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.6;
-      max-width: 560px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-actions {
-      margin-top: 18px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-btn {
-      border: none;
-      outline: none;
-      border-radius: 12px;
-      padding: 12px 18px;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 0.95rem;
-      transition: transform 0.16s ease, opacity 0.16s ease;
-    }
-
-    .hero-btn.primary {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 8px 18px rgba(46, 125, 50, 0.16);
-    }
-
-    .hero-btn.secondary {
-      background: #fff;
-      color: var(--primary-dark);
-      border: 1px solid var(--border);
-    }
-
-    .hero-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .side-promo {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: linear-gradient(180deg, #ffffff 0%, #f8fff8 100%);
-    }
-
-    .promo-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      align-self: flex-start;
-      border-radius: 999px;
-      background: #fff5e6;
-      color: #8d5a00;
-      border: 1px solid #ffe0b2;
-      padding: 8px 12px;
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
-
-    .promo-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-top: 16px;
-      line-height: 1.3;
-    }
-
-    .promo-copy {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.55;
-      margin-top: 10px;
-    }
-
-    .promo-cta {
-      margin-top: 18px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--primary);
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 24px;
-    }
-
-    .left-column,
-    .right-column {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .card {
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      opacity: 0.9;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .card-title {
-      margin: 0;
-      font-size: 1.12rem;
-      font-weight: 700;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-link {
-      font-size: 0.9rem;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .product-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .product {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .product:last-child {
-      border-bottom: none;
-    }
-
-    .product-img {
-      width: 58px;
-      height: 58px;
-      border-radius: 14px;
-      object-fit: cover;
-      background: #f3f3f3;
-      border: 1px solid #edf3ee;
-      flex-shrink: 0;
-    }
-
-    .product-details {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .product-title {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .product-desc {
-      display: block;
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.4;
-      margin-bottom: 6px;
-    }
-
-    .product-price {
-      font-weight: 700;
-      color: var(--primary-dark);
-    }
-
-    .add-cart-btn {
-      border: none;
-      outline: none;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-size: 0.92rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.15s ease;
-      box-shadow: 0 8px 16px rgba(102, 187, 106, 0.18);
-      white-space: nowrap;
-    }
-
-    .add-cart-btn:hover {
-      background: var(--primary);
-      transform: translateY(-1px);
-    }
-
-    .cart-summary {
-      font-size: 1.06rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 6px;
-    }
-
-    .cart-subcopy {
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin-bottom: 12px;
-    }
-
-    .cart-items {
-      color: var(--muted);
-      font-size: 0.96rem;
-      margin-bottom: 12px;
-      min-height: 54px;
-      line-height: 1.55;
-    }
-
-    .checkout-note {
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: #f7fbf7;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-    }
-
-    .quick-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .quick-action {
-      background: var(--accent);
-      color: #fff;
-      border-radius: 14px;
-      padding: 13px 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.95rem;
-      box-shadow: 0 8px 18px rgba(102,187,106,0.18);
-      transition: transform 0.15s ease, background 0.15s ease;
-      border: none;
-      outline: none;
-    }
-
-    .quick-action:hover {
-      background: var(--primary);
-      transform: translateY(-1px);
-    }
-
-    .orders-list,
-    .saved-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .order,
-    .saved-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .order:last-child,
-    .saved-item:last-child {
-      border-bottom: none;
-    }
-
-    .details {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .merchant,
-    .saved-name {
-      font-weight: 700;
-    }
-
-    .date,
-    .saved-meta {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .amount.negative {
-      color: var(--danger);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .saved-price {
-      color: var(--primary-dark);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .banner-card {
-      padding: 22px 24px;
-      background: linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%);
-      color: #fff;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .banner-card::before {
-      display: none;
-    }
-
-    .banner-card::after {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      right: -50px;
-      bottom: -60px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.12);
-    }
-
-    .banner-kicker {
-      font-size: 0.85rem;
-      font-weight: 700;
-      opacity: 0.9;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .banner-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      line-height: 1.3;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .banner-copy {
-      font-size: 0.95rem;
-      line-height: 1.55;
-      opacity: 0.96;
-      position: relative;
-      z-index: 1;
-    }
-
-    .loading-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(255,255,255,0.55);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 14px;
-      backdrop-filter: blur(3px);
-    }
-
-    .loading-spinner {
-      width: 56px;
-      height: 56px;
-      border: 4px solid #eef4ef;
-      border-top: 4px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    .loading-text {
-      font-weight: 700;
-      color: var(--primary-dark);
-      background: #fff;
-      padding: 10px 16px;
-      border-radius: 999px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid var(--border);
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .footer {
-      width: 100%;
-      background: #fff;
-      color: var(--muted);
-      text-align: center;
-      font-size: 0.95rem;
-      padding: 18px 0 12px 0;
-      border-top: 1px solid var(--border);
-      margin-top: auto;
-    }
-
-    #toast {
-      display: none;
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #263238;
-      color: #fff;
-      padding: 14px 26px;
-      border-radius: 12px;
-      font-size: 0.98rem;
-      z-index: 10000;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
-      max-width: calc(100vw - 32px);
-      text-align: center;
-    }
-
-    @media (max-width: 1180px) {
-      .hero-grid,
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .app-container {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        width: 100%;
-      }
-
-      .main-header,
-      .dashboard {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .page-title {
-        font-size: 1.35rem;
-      }
-
-      .hero-headline {
-        font-size: 1.5rem;
-      }
-
-      .card,
-      .hero-card,
-      .side-promo {
-        padding: 18px;
-      }
-
-      .product {
-        align-items: flex-start;
-        flex-wrap: wrap;
-      }
-    }
+      display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none;
+      padding: 14px 24px; font-weight: 600; border-left: 4px solid transparent;
+      border-radius: 0 18px 18px 0; transition: background 0.18s ease, border-color 0.18s ease;
+    }
+    .sidebar nav a.active, .sidebar nav a:hover { background: rgba(255,255,255,0.12); border-left-color: #dcedc8; }
+
+    .demo-panel { margin: 18px 16px 0 16px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.18); border-radius: 16px; overflow: hidden; }
+    .demo-panel summary { list-style: none; cursor: pointer; padding: 14px 14px; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 0.95rem; }
+    .demo-panel summary::-webkit-details-marker { display: none; }
+    .demo-panel-content { padding: 0 14px 14px 14px; }
+    .demo-panel label { display: block; font-size: 0.82rem; margin-bottom: 6px; color: rgba(255,255,255,0.92); }
+    
+    .input-wrapper { position: relative; width: 100%; margin-bottom: 10px; }
+    .demo-panel input { width: 100%; border: none; outline: none; border-radius: 10px; padding: 10px 40px 10px 12px; font-size: 0.9rem; color: var(--text); }
+    .toggle-visibility { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); cursor: pointer; font-size: 1.2rem; }
+
+    .demo-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .demo-panel button { flex: 1 1 100px; border: none; outline: none; border-radius: 10px; padding: 10px 12px; font-weight: 700; cursor: pointer; background: #fff; color: var(--primary-dark); transition: transform 0.15s ease, background 0.15s ease; }
+    .demo-panel button:hover { transform: translateY(-1px); background: #dcedc8; }
+    .demo-hint { margin-top: 8px; font-size: 0.75rem; line-height: 1.4; color: rgba(255,255,255,0.82); }
+
+    .user-section { margin-top: auto; padding: 22px 24px 0 24px; display: flex; align-items: center; gap: 12px; }
+    .user-avatar { width: 48px; height: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.85); background: #fff; }
+    .user-name { font-weight: 700; font-size: 0.98rem; }
+    .user-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.86); }
+
+    .main-content { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+    .main-header { background: rgba(255,255,255,0.88); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 26px 34px 20px 34px; }
+    .page-title { font-size: 1.8rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+    .hero-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-soft); color: var(--primary-dark); border: 1px solid #cfe8d1; border-radius: 999px; padding: 10px 14px; font-size: 0.9rem; font-weight: 700; }
+
+    .dashboard { padding: 24px 34px 30px 34px; display: flex; flex-direction: column; gap: 24px; flex: 1; }
+    .hero-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 24px; }
+    .card, .hero-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow); padding: 24px; position: relative; overflow: hidden; }
+    
+    .hero-card { background: radial-gradient(circle at top right, rgba(102, 187, 106, 0.14), transparent 32%), linear-gradient(180deg, #ffffff 0%, #fbfffb 100%); }
+    .hero-headline { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+    .hero-btn { border: none; border-radius: 12px; padding: 12px 18px; font-weight: 700; cursor: pointer; transition: transform 0.16s ease; }
+    .hero-btn.primary { background: var(--primary); color: #fff; }
+
+    .product-list { display: flex; flex-direction: column; gap: 14px; }
+    .product { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .product-img { width: 58px; height: 58px; border-radius: 14px; background: #f3f3f3; }
+    .add-cart-btn { border: none; background: var(--accent); color: #fff; border-radius: 12px; padding: 10px 14px; font-weight: 700; cursor: pointer; }
+
+    .quick-action { background: var(--accent); color: #fff; border-radius: 14px; padding: 13px 16px; border: none; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+    
+    .loading-overlay { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.7); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(4px); }
+    .loading-spinner { width: 56px; height: 56px; border: 4px solid #eef4ef; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    #toast { display: none; position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: #263238; color: #fff; padding: 14px 26px; border-radius: 12px; z-index: 10000; }
+    
+    .dashboard-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
+    @media (max-width: 1180px) { .hero-grid, .dashboard-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div class="app-container">
     <aside class="sidebar">
       <div class="logo">
-        <div class="brand">
-          <i class="material-icons">shopping_bag</i>
-          <span>Shopping @ PDOT</span>
-        </div>
-        <div class="welcome-copy">
-          Discover fresh deals, everyday essentials, and fast checkout in one simple shopping experience.
-        </div>
+        <div class="brand"><i class="material-icons">shopping_bag</i><span>Shopping @ PDOT</span></div>
+        <div class="welcome-copy">Discover fresh deals and fast checkout in one simple shopping experience.</div>
       </div>
 
       <nav>
         <a href="#" class="active"><i class="material-icons">home</i>Home</a>
         <a href="#"><i class="material-icons">storefront</i>Shop</a>
-        <a href="#"><i class="material-icons">favorite_border</i>Saved</a>
         <a href="#" id="ordersSidebar"><i class="material-icons">receipt_long</i>Orders</a>
-        <a href="#"><i class="material-icons">local_shipping</i>Delivery</a>
         <a href="#"><i class="material-icons">support_agent</i>Support</a>
       </nav>
 
-      <details class="demo-panel">
-        <summary>
-          <span>Demo Settings</span>
-          <i class="material-icons">expand_more</i>
-        </summary>
+      <details class="demo-panel" open>
+        <summary><span>Demo Settings</span><i class="material-icons">expand_more</i></summary>
         <div class="demo-panel-content">
           <label for="routingKeyInput">PagerDuty Routing Key</label>
-          <input
-            id="routingKeyInput"
-            type="text"
-            placeholder="Enter Events API v2 routing key"
-            autocomplete="off"
-          />
+          <div class="input-wrapper">
+            <input id="routingKeyInput" type="password" placeholder="Enter routing key" autocomplete="off" />
+            <i class="material-icons toggle-visibility" id="toggleVisibility">visibility_off</i>
+          </div>
           <div class="demo-actions">
-            <button id="saveRoutingKeyBtn" type="button">Save Key</button>
-            <button id="clearRoutingKeyBtn" type="button">Clear</button>
+            <button id="saveRoutingKeyBtn">Save Key</button>
+            <button id="clearRoutingKeyBtn">Clear</button>
           </div>
-          <div class="demo-hint">
-            This panel is only for the workshop setup. Customer actions will silently send events to the saved routing key.
-          </div>
+          <div class="demo-hint">Enter your assigned workshop routing key to connect this store to your PagerDuty service.</div>
         </div>
       </details>
 
       <div class="user-section">
-        <img class="user-avatar" src="https://randomuser.me/api/portraits/women/65.jpg" alt="User Avatar" />
-        <div>
-          <div class="user-name">Taylor Morgan</div>
-          <div class="user-subtitle">Gold Member</div>
-        </div>
+        <img class="user-avatar" src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" />
+        <div><div class="user-name">Taylor Morgan</div><div class="user-subtitle">Gold Member</div></div>
       </div>
     </aside>
 
     <main class="main-content">
       <header class="main-header">
         <div class="header-top">
-          <div class="page-title">
-            <i class="material-icons">shopping_basket</i>
-            Welcome back to Shopping @ PDOT
-          </div>
-          <div class="hero-chip">
-            <i class="material-icons">verified</i>
-            Free shipping on orders over $50
-          </div>
-        </div>
-        <div class="header-subtitle">
-          Pick up your favorites, explore curated offers, and check out in just a few clicks.
+          <div class="page-title"><i class="material-icons">shopping_basket</i>Welcome to Shopping @ PDOT</div>
+          <div class="hero-chip"><i class="material-icons">verified</i>Free shipping over $50</div>
         </div>
       </header>
 
       <section class="dashboard">
         <div class="hero-grid">
           <div class="hero-card">
-            <div class="hero-kicker">Seasonal spotlight</div>
-            <div class="hero-headline">Fresh arrivals for everyday movement, work, and travel.</div>
-            <div class="hero-text">
-              Shop trending essentials handpicked for convenience, comfort, and quick delivery.
-            </div>
+            <div class="hero-headline">Fresh arrivals for movement and travel.</div>
+            <p>Shop trending essentials handpicked for convenience and comfort.</p>
             <div class="hero-actions">
-              <button class="hero-btn primary" type="button">Shop New Arrivals</button>
-              <button class="hero-btn secondary" type="button">View Offers</button>
+              <button class="hero-btn primary">Shop New Arrivals</button>
             </div>
           </div>
-
-          <div class="hero-card side-promo">
-            <div>
-              <div class="promo-badge">
-                <i class="material-icons">local_offer</i>
-                Limited Offer
-              </div>
-              <div class="promo-title">Save 20% on travel-ready essentials this week.</div>
-              <div class="promo-copy">
-                Lightweight bags, wireless accessories, and everyday picks selected for busy customers.
-              </div>
-            </div>
-            <a href="#" class="promo-cta">
-              Explore collection
-              <i class="material-icons">arrow_forward</i>
-            </a>
+          <div class="hero-card">
+            <div class="hero-headline">Save 20%</div>
+            <p>On all travel gear this week for members.</p>
           </div>
         </div>
 
         <div class="dashboard-grid">
           <div class="left-column">
             <section class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="material-icons" style="color:var(--accent)">star</i>
-                  Featured Products
-                </h3>
-                <a href="#" class="card-link">View all</a>
-              </div>
-
+              <h3>Featured Products</h3>
               <div class="product-list">
                 <div class="product">
-                  <img class="product-img" src="https://placehold.co/58x58?text=Shoes" alt="Running Shoes" />
-                  <div class="product-details">
-                    <span class="product-title">Running Shoes</span>
-                    <span class="product-desc">Lightweight support for daily runs and long walks.</span>
-                    <span class="product-price">$59.99</span>
-                  </div>
+                  <img class="product-img" src="https://placehold.co/58x58?text=Shoes" />
+                  <div style="flex:1"><b>Running Shoes</b><br/><small>$59.99</small></div>
                   <button class="add-cart-btn" data-product="shoes">Add to Cart</button>
                 </div>
-
                 <div class="product">
-                  <img class="product-img" src="https://placehold.co/58x58?text=Audio" alt="Wireless Headphones" />
-                  <div class="product-details">
-                    <span class="product-title">Wireless Headphones</span>
-                    <span class="product-desc">Crisp sound, long battery life, and travel-friendly comfort.</span>
-                    <span class="product-price">$89.99</span>
-                  </div>
+                  <img class="product-img" src="https://placehold.co/58x58?text=Audio" />
+                  <div style="flex:1"><b>Headphones</b><br/><small>$89.99</small></div>
                   <button class="add-cart-btn" data-product="headphones">Add to Cart</button>
                 </div>
-
-                <div class="product">
-                  <img class="product-img" src="https://placehold.co/58x58?text=Bag" alt="Travel Backpack" />
-                  <div class="product-details">
-                    <span class="product-title">Travel Backpack</span>
-                    <span class="product-desc">Smart storage with a sleek design for work or weekends away.</span>
-                    <span class="product-price">$39.99</span>
-                  </div>
-                  <button class="add-cart-btn" data-product="backpack">Add to Cart</button>
-                </div>
               </div>
-            </section>
-
-            <section class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="material-icons" style="color:var(--accent)">receipt_long</i>
-                  Recent Orders
-                </h3>
-                <a href="#" class="card-link">See history</a>
-              </div>
-
-              <ul class="orders-list" id="ordersList">
-                <li class="order">
-                  <div class="details">
-                    <span class="merchant">Order #1001</span>
-                    <span class="date">Jun 18, 2025 • Delivered</span>
-                  </div>
-                  <span class="amount negative">-$89.99</span>
-                </li>
-                <li class="order">
-                  <div class="details">
-                    <span class="merchant">Order #1000</span>
-                    <span class="date">Jun 10, 2025 • Delivered</span>
-                  </div>
-                  <span class="amount negative">-$39.99</span>
-                </li>
-                <li class="order">
-                  <div class="details">
-                    <span class="merchant">Order #999</span>
-                    <span class="date">Jun 01, 2025 • Delivered</span>
-                  </div>
-                  <span class="amount negative">-$59.99</span>
-                </li>
-              </ul>
             </section>
           </div>
 
           <div class="right-column">
             <section class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="material-icons" style="color:var(--accent)">shopping_cart</i>
-                  Your Cart
-                </h3>
-              </div>
-
-              <div class="cart-summary">Total: <span id="cartTotal">$0.00</span></div>
-              <div class="cart-subcopy">Secure checkout, quick confirmation, and easy order tracking.</div>
-              <div class="cart-items" id="cartItems">No items in cart.</div>
-
-              <div class="checkout-note" id="checkoutNote">
-                Add items to your cart and continue to checkout when you're ready.
-              </div>
-
+              <h3>Your Cart</h3>
+              <div id="cartItems">No items in cart.</div>
+              <hr style="border:0; border-top:1px solid var(--border); margin:15px 0;"/>
+              <div style="font-weight:700; font-size:1.2rem; margin-bottom:15px;">Total: <span id="cartTotal">$0.00</span></div>
               <div class="quick-actions">
-                <button class="quick-action" data-action="checkout" type="button">
-                  <i class="material-icons">payment</i>
-                  Checkout
-                </button>
-                <button class="quick-action" data-action="clearcart" type="button">
-                  <i class="material-icons">remove_shopping_cart</i>
-                  Clear Cart
-                </button>
-              </div>
-            </section>
-
-            <section class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="material-icons" style="color:var(--accent)">favorite</i>
-                  Saved for Later
-                </h3>
-              </div>
-
-              <ul class="saved-list">
-                <li class="saved-item">
-                  <div class="details">
-                    <span class="saved-name">Smart Water Bottle</span>
-                    <span class="saved-meta">Hydration reminder • Popular this week</span>
-                  </div>
-                  <span class="saved-price">$24.99</span>
-                </li>
-                <li class="saved-item">
-                  <div class="details">
-                    <span class="saved-name">Travel Organizer Set</span>
-                    <span class="saved-meta">Compact and carry-on friendly</span>
-                  </div>
-                  <span class="saved-price">$18.99</span>
-                </li>
-                <li class="saved-item">
-                  <div class="details">
-                    <span class="saved-name">Desk Essentials Pack</span>
-                    <span class="saved-meta">Work-from-anywhere bundle</span>
-                  </div>
-                  <span class="saved-price">$32.50</span>
-                </li>
-              </ul>
-            </section>
-
-            <section class="card banner-card">
-              <div class="banner-kicker">Member perk</div>
-              <div class="banner-title">Enjoy faster checkout and priority delivery updates.</div>
-              <div class="banner-copy">
-                Your account keeps your preferences, saved items, and order history ready whenever you return.
+                <button class="quick-action" data-action="checkout"><i class="material-icons">payment</i>Checkout</button>
+                <button class="quick-action" style="background:var(--muted)" data-action="clearcart">Clear</button>
               </div>
             </section>
           </div>
@@ -1080,12 +201,9 @@
 
       <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
-        <div class="loading-text" id="loadingText">Processing your order…</div>
+        <div class="loading-text" id="loadingText">Processing order...</div>
       </div>
-
-      <footer class="footer">
-        &copy; 2025 Shopping @ PDOT — Customer storefront demo
-      </footer>
+      <footer style="text-align:center; padding:20px; color:var(--muted);">&copy; 2025 Shopping @ PDOT — Workshop Demo</footer>
     </main>
   </div>
 
@@ -1094,347 +212,101 @@
   <script>
     const products = {
       shoes: { name: "Running Shoes", price: 59.99 },
-      headphones: { name: "Wireless Headphones", price: 89.99 },
-      backpack: { name: "Travel Backpack", price: 39.99 }
+      headphones: { name: "Headphones", price: 89.99 }
     };
-
     let cart = {};
 
-    function showToast(message, duration = 2600) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.style.display = "block";
-      clearTimeout(window.__toastTimeout);
-      window.__toastTimeout = setTimeout(() => {
-        toast.style.display = "none";
-      }, duration);
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg; t.style.display = "block";
+      setTimeout(() => { t.style.display = "none"; }, 3000);
     }
 
-    function showLoading(message = "Processing your order…") {
-      document.getElementById("loadingText").textContent = message;
-      document.getElementById("loadingOverlay").style.display = "flex";
-    }
-
-    function hideLoading() {
-      document.getElementById("loadingOverlay").style.display = "none";
-    }
-
-    function sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    function randomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function randomChoice(items) {
-      return items[Math.floor(Math.random() * items.length)];
-    }
+    // Toggle Password Visibility
+    document.getElementById("toggleVisibility").addEventListener("click", function() {
+      const input = document.getElementById("routingKeyInput");
+      if (input.type === "password") {
+        input.type = "text"; this.textContent = "visibility";
+      } else {
+        input.type = "password"; this.textContent = "visibility_off";
+      }
+    });
 
     function saveRoutingKey() {
-      const input = document.getElementById("routingKeyInput");
-      const key = input.value.trim();
-
-      if (!key) {
-        showToast("Please enter a routing key.");
-        return;
-      }
-
-      localStorage.setItem("pagerduty_api_key", key);
-      showToast("Routing key saved.");
+      const val = document.getElementById("routingKeyInput").value.trim();
+      if (!val) { showToast("Enter a key first!"); return; }
+      localStorage.setItem("pagerduty_routing_key", val);
+      showToast("Key saved securely.");
     }
 
     function clearRoutingKey() {
-      localStorage.removeItem("pagerduty_api_key");
+      localStorage.removeItem("pagerduty_routing_key");
       document.getElementById("routingKeyInput").value = "";
-      showToast("Routing key cleared.");
+      showToast("Key cleared.");
     }
 
-    function loadRoutingKey() {
-      const savedKey = localStorage.getItem("pagerduty_api_key") || "";
-      document.getElementById("routingKeyInput").value = savedKey;
-    }
-
-    function getPagerDutyRoutingKey() {
-      return localStorage.getItem("pagerduty_api_key");
-    }
-
-    async function sendPagerDutyEvent(eventBody) {
-      const routingKey = getPagerDutyRoutingKey();
-
-      if (!routingKey) {
-        throw new Error("No routing key saved.");
-      }
-
-      const requestBody = {
-        routing_key: routingKey,
-        ...eventBody
-      };
-
-      const response = await fetch("https://events.pagerduty.com/v2/enqueue", {
+    async function sendPDEvent(payload) {
+      const key = localStorage.getItem("pagerduty_routing_key");
+      if (!key) return;
+      await fetch("https://events.pagerduty.com/v2/enqueue", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody)
+        body: JSON.stringify({ routing_key: key, ...payload })
       });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to enqueue PagerDuty event");
-      }
-
-      return data;
     }
 
-    function buildDemoEvents() {
-      const dbHost = "checkout-db-primary";
-      const checkoutEndpoint = "/checkout";
-      const deploymentVersion = `v2.${randomInt(2, 5)}.${randomInt(1, 9)}`;
-
-      return [
-        {
-          delayBeforeMs: 0,
-          body: {
-            event_action: "trigger",
-            dedup_key: "checkout-db-slow-queries",
-            payload: {
-              summary: "Retail Checkout Database slow queries detected",
-              severity: "warning",
-              source: "database-monitor",
-              component: "Retail Checkout Database",
-              group: "database-performance",
-              class: "database",
-              custom_details: {
-                service: "Retail Checkout Database",
-                metric: "query_latency",
-                value: `${randomInt(650, 950)}ms`,
-                threshold: "500ms",
-                database: dbHost,
-                probable_impact: "Checkout request latency increasing"
-              }
-            }
-          }
-        },
-        {
-          delayBeforeMs: 10000,
-          body: {
-            event_action: "trigger",
-            dedup_key: "checkout-db-connections",
-            payload: {
-              summary: "Retail Checkout Database connection pool saturation",
-              severity: "warning",
-              source: "database-monitor",
-              component: "Retail Checkout Database",
-              group: "database-performance",
-              class: "database",
-              custom_details: {
-                service: "Retail Checkout Database",
-                metric: "connection_pool",
-                value: `${randomInt(89, 96)}%`,
-                threshold: "85%",
-                database: dbHost,
-                active_connections: randomInt(180, 240),
-                probable_impact: "Application threads waiting on DB connections"
-              }
-            }
-          }
-        },
-        {
-          delayBeforeMs: 15000,
-          body: {
-            event_action: "trigger",
-            dedup_key: "checkout-api-latency",
-            payload: {
-              summary: "Retail Checkout API latency above threshold",
-              severity: "critical",
-              source: "apm-monitor",
-              component: "Retail Checkout API",
-              group: "api-performance",
-              class: "latency",
-              custom_details: {
-                service: "Retail Checkout API",
-                metric: "p95_latency",
-                value: `${randomInt(2100, 3200)}ms`,
-                threshold: "1000ms",
-                endpoint: checkoutEndpoint,
-                downstream_dependency: "Retail Checkout Database",
-                recent_deployment: deploymentVersion
-              }
-            }
-          }
-        },
-        {
-          delayBeforeMs: 15000,
-          body: {
-            event_action: "trigger",
-            dedup_key: "checkout-api-errors",
-            payload: {
-              summary: "Retail Checkout API error rate elevated",
-              severity: "critical",
-              source: "apm-monitor",
-              component: "Retail Checkout API",
-              group: "api-errors",
-              class: "application",
-              custom_details: {
-                service: "Retail Checkout API",
-                metric: "error_rate",
-                value: `${randomInt(10, 18)}%`,
-                threshold: "5%",
-                endpoint: checkoutEndpoint,
-                http_status: randomChoice(["500", "502", "503"]),
-                business_impact: "Customers unable to complete purchases"
-              }
-            }
-          }
-        }
-      ];
-    }
-
-    async function runCheckoutIncidentSimulation() {
-      if (window.__simulationRunning) return;
-
-      const routingKey = getPagerDutyRoutingKey();
-      if (!routingKey) {
-        return;
-      }
-
-      window.__simulationRunning = true;
-
-      try {
-        const events = buildDemoEvents();
-        for (const event of events) {
-          if (event.delayBeforeMs > 0) {
-            await sleep(event.delayBeforeMs);
-          }
-          await sendPagerDutyEvent(event.body);
-        }
-      } catch (error) {
-        console.error("PagerDuty demo event error:", error.message);
-      } finally {
-        window.__simulationRunning = false;
-      }
-    }
-
-    function updateCartDisplay() {
-      const cartItemsDiv = document.getElementById("cartItems");
-      const cartTotalSpan = document.getElementById("cartTotal");
-      const checkoutNote = document.getElementById("checkoutNote");
-      let total = 0;
-      const items = Object.keys(cart);
-
-      if (items.length === 0) {
-        cartItemsDiv.textContent = "No items in cart.";
-        cartTotalSpan.textContent = "$0.00";
-        checkoutNote.textContent = "Add items to your cart and continue to checkout when you're ready.";
-        return;
-      }
-
-      let html = "";
-      items.forEach(key => {
-        const item = products[key];
-        const qty = cart[key];
-        total += item.price * qty;
-        html += `${item.name} x${qty} — $${(item.price * qty).toFixed(2)}<br>`;
+    async function triggerIncidents() {
+      // Simulate Database issue [cite: 7]
+      await sendPDEvent({
+        event_action: "trigger",
+        payload: { summary: "Retail Checkout Database slow queries", severity: "warning", source: "shop-front", component: "Retail Checkout Database" }
       });
-
-      cartItemsDiv.innerHTML = html;
-      cartTotalSpan.textContent = `$${total.toFixed(2)}`;
-      checkoutNote.textContent = "Your items are ready. Complete checkout to place your order.";
-    }
-
-    function addOrderToHistory(totalAmount) {
-      const ordersList = document.getElementById("ordersList");
-      const orderId = 1002 + Math.floor(Math.random() * 1000);
-      const date = new Date().toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "numeric"
-      });
-
-      const li = document.createElement("li");
-      li.className = "order";
-      li.innerHTML = `
-        <div class="details">
-          <span class="merchant">Order #${orderId}</span>
-          <span class="date">${date} • Processing</span>
-        </div>
-        <span class="amount negative">-$${totalAmount.toFixed(2)}</span>
-      `;
-      ordersList.insertBefore(li, ordersList.firstChild);
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      loadRoutingKey();
-
-      document.getElementById("saveRoutingKeyBtn").addEventListener("click", saveRoutingKey);
-      document.getElementById("clearRoutingKeyBtn").addEventListener("click", clearRoutingKey);
-
-      document.getElementById("routingKeyInput").addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-          saveRoutingKey();
-        }
-      });
-
-      document.querySelectorAll(".add-cart-btn").forEach(btn => {
-        btn.addEventListener("click", function () {
-          const key = this.dataset.product;
-          cart[key] = (cart[key] || 0) + 1;
-          updateCartDisplay();
-          showToast(products[key].name + " added to cart!");
+      // Simulate API issue [cite: 5]
+      setTimeout(async () => {
+        await sendPDEvent({
+          event_action: "trigger",
+          payload: { summary: "Retail Checkout API error rate elevated", severity: "critical", source: "shop-front", component: "Retail Checkout API" }
         });
-      });
+      }, 5000);
+    }
 
-      document.querySelectorAll(".quick-action").forEach(btn => {
-        btn.addEventListener("click", async function () {
-          const action = this.dataset.action;
+    document.getElementById("saveRoutingKeyBtn").addEventListener("click", saveRoutingKey);
+    document.getElementById("clearRoutingKeyBtn").addEventListener("click", clearRoutingKey);
 
-          if (action === "checkout") {
-            if (Object.keys(cart).length === 0) {
-              showToast("Your cart is empty!");
-              return;
-            }
-
-            showLoading("Processing your order…");
-            await sleep(2600);
-
-            showLoading("Still working on your checkout…");
-            await sleep(2800);
-
-            let total = 0;
-            Object.keys(cart).forEach(key => {
-              total += products[key].price * cart[key];
-            });
-
-            addOrderToHistory(total);
-            cart = {};
-            updateCartDisplay();
-
-            runCheckoutIncidentSimulation();
-
-            await sleep(1400);
-            hideLoading();
-            showToast("We’re having trouble confirming your order right now. Please try again.", 4200);
-          }
-
-          if (action === "clearcart") {
-            cart = {};
-            updateCartDisplay();
-            showToast("Cart cleared.");
-          }
-        });
-      });
-
-      document.getElementById("ordersSidebar").addEventListener("click", function (e) {
-        e.preventDefault();
-        showToast("Opening your orders…");
-      });
-
-      document.querySelectorAll(".order").forEach(item => {
-        item.addEventListener("click", function () {
-          showToast("Order details coming soon!");
-        });
+    document.querySelectorAll(".add-cart-btn").forEach(btn => {
+      btn.addEventListener("click", function() {
+        const p = this.dataset.product;
+        cart[p] = (cart[p] || 0) + 1;
+        updateCart();
       });
     });
+
+    function updateCart() {
+      const container = document.getElementById("cartItems");
+      let total = 0; html = "";
+      Object.keys(cart).forEach(k => {
+        const item = products[k];
+        html += `<div>${item.name} x${cart[k]}</div>`;
+        total += item.price * cart[k];
+      });
+      container.innerHTML = html || "No items in cart.";
+      document.getElementById("cartTotal").textContent = `$${total.toFixed(2)}`;
+    }
+
+    document.querySelector('[data-action="checkout"]').addEventListener("click", async () => {
+      if (Object.keys(cart).length === 0) { showToast("Cart is empty!"); return; }
+      document.getElementById("loadingOverlay").style.display = "flex";
+      await triggerIncidents();
+      setTimeout(() => {
+        document.getElementById("loadingOverlay").style.display = "none";
+        showToast("Error: Checkout service is currently unavailable.");
+      }, 4000);
+    });
+
+    // Load saved key on boot
+    window.onload = () => {
+      const saved = localStorage.getItem("pagerduty_routing_key");
+      if (saved) document.getElementById("routingKeyInput").value = saved;
+    };
   </script>
 </body>
 </html>
